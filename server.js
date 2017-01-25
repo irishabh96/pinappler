@@ -15,6 +15,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views')); // register view
 app.set('view engine','hbs'); //hbs
 hbs.registerPartials(__dirname + '/views/partials'); // registering partials
+
+app.get('/', function(req, res){
+	res.send('switch to /auth/pannel or /admin')
+})
 	
 
 app.use(bodyParser.urlencoded({ extended: false }));
