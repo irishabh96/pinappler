@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+      body,html{
+        background-color: #333;
+        color: #fff;
+      }
+    *{
+      font-family: 'Open Sans', sans-serif;
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Dashboard</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#all_products">List Products<span class="sr-only"></span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Logout
+        <span class="glyphicon glyphicon-log-out"></span>
+    </a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid  col-md-4 col-md-offset-4">
+      <!-- main  -->
+  <div>
+    <div class="form-group">
+      <label for="product name">Product Name</label>
+      <input type="text" placeholder="Product Name" class = "form-control" name="product_name"><br>
+    </div>
+    <div class="form-group">
+      <label for="brand" >Product Brand</label>
+      <input type="text" placeholder="Brand"  class ="form-control" name="brand">
+    </div>
+    <div class="form-group">
+      <label for="brand" >Category</label>
+      <input type="text" placeholder="Category"  class ="form-control" name="Category">
+    </div>
+    <div class="form-group">
+      <label for="brand" >Discription</label>
+      <textarea placeholder="Product Discription Needed" class="form-control"></textarea>
+    </div>
+    <div>
+      <label for="image of product" ></label>
+      <input type="file" name="pic_of_product"><br>
+      <input class="btn btn-default" type="submit" name="submit">
+    </div>
+<br>
+<br>
+  </div>
+</div>
+
+<div  id="all_products">
+
+  <div>
+    <!-- All products -->
+
+    <table class="table table-inverse">
+      <thead>
+        <tr>
+        
+          <th>Product Name</th>
+          <th>Brand</th>
+          <th>Category</th>
+          <th>Ram</th>
+          <th>Display Resolution</th>
+          <th>Colors available</th>
+          <th>Cellular</th>
+          <th>Sensors</th>
+          <th>Battery Size</th>
+          <th>Colors available</th>
+          <th>Minimum Price</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Rs.Sample</td>
+        </tr>
+        <tr>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Sample</td>
+          <td>Rs. Sample</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="Hello World"></script>
+  </body>
+</html>
