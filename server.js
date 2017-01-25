@@ -29,11 +29,13 @@ require('./config/passport_config.js') (app);
 //routes
 var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
+var apiRoutes = require('./routes/apiRoutes'); //product route
+app.use('/api/products', apiRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config = require('./config/config.js'); // get our config file
+// var config = require('./config/config.js'); // get our config file
 // var User   = require('./models/user');
 
 //port and database

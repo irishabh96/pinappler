@@ -41,7 +41,7 @@ authRouter.route('/signup')
 
 authRouter.route('/pannel')
 		.get(function(req, res){
-			res.render('admin',{title: 'title'});
+			res.render('admin_product_create',{title: 'title'});
 	});
 
 

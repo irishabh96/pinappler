@@ -19,7 +19,7 @@ adminRouter.route('/addmodel')
 				if (err){
 					console.log(err)
 				};
-			// attach data url	console.log('data inserted')
+			// attach data url console.log('data inserted')
 			});
 		});
 
