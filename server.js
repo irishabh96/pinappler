@@ -5,7 +5,6 @@ var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var path 		= require('path');
 var hbs 		= require('hbs');
-var mongojs 	= require('mongojs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');

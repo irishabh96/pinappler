@@ -3,9 +3,16 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var apiRouter = express.Router();
 
-var db = mongoose.connect('mongodb://localhost/pineappler');
+// var config = require('../config.json')
+// [process.env.NODE_ENV || 'development'];
+var config = require('../config.js');
+var url = config.database
+
+var db = mongoose.connect(url);
+
 
 var product = require('../models/products_insert');
+
 
 apiRouter.route('/')
 		.post(function(req, res){
