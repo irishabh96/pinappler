@@ -17,12 +17,18 @@ adminRouter.route('/add-new-product')
 		.get(function(req,res){
 			res.render('admin_product_create',{
 				title: 'Welcome'
-			})
-		})
+			});
+		});
 adminRouter.route('/products')
 		.get(function(req,res){
 			res.render('admin_products',{
 				title: 'Welcome'
-			})
-		})
+			});
+		});
+adminRouter.route('/add-new-page')
+		.get(function(req, res){
+			res.render('admin_page_add',{
+				title: 'add a page'
+			});
+		});
 module.exports = adminRouter;

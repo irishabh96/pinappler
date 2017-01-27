@@ -21,6 +21,9 @@
     *{
       font-family: 'Open Sans', sans-serif;
     }
+    .navbar{
+      border-radius: 0px;
+    }
     </style>
   </head>
   <body>
@@ -41,9 +44,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="#all_products">List Products<span class="sr-only"></span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="/admin/add-new-page">Add Page</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/admin/add-new-product">Add Product</a></li>
             <li><a href="/admin/products">List Products</a></li>
@@ -53,9 +56,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="/">Main Website</a></li>
         <li><a href="#">Logout
         <span class="glyphicon glyphicon-log-out"></span>
-    </a>
+          </a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

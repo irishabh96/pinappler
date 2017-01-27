@@ -1,37 +1,42 @@
 {{>header}}
-<div class="container-fluid  col-md-4">
-  <h1>Add a Product</h1>    
-      <!-- main  -->
+<div class="container-fluid">
+      
+      <!-- main-->
   <div>
-    <div class="form-group">
-      <label for="product name">Product Name</label>
-      <input type="text" placeholder="Product Name" class = "form-control" name="product_name"><br>
-    </div>
-    <div class="form-group">
-      <label for="brand" >Product Brand</label>
-      <input type="text" placeholder="Brand"  class ="form-control" name="brand">
-    </div>
-    <div class="form-group">
-      <label for="brand" >Category</label>
-      <select name="category" class="form-control">
-        <option value="">Select Category</option>
-        <option value="">Mobile</option>
-        <option value="">Tablet</option>
-        <option value="">Watch</option>
-        <option value="">Laptop</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="brand" >Discription</label>
-      <textarea name="iscription" placeholder="Product Discription Needed" class="form-control"></textarea>
-    </div>
-    <div>
-      <label for="image of product" ></label>
-      <input type="file" name="pic_of_product"><br>
-      <input class="btn btn-default" type="submit" name="submit">
-    </div>
-<br>
-<br>
-  </div>
-</div>
+    <div class="col-md-4">
+        <h1>Add a Product</h1>
+        <form action="/api/products" method="post" >
+          <div class="form-group">
+            <label for="product name">Product Name</label>
+            <input type="text" placeholder="Product Name" class = "form-control" name="product_name"><br>
+          </div>
+          <div class="form-group">
+            <label for="brand" >Product Brand</label>
+            <input type="text" placeholder="Brand"  class ="form-control" name="brand">
+          </div>
+          <div class="form-group">
+            <label for="brand" >Category</label>
+            <select name="category" class="form-control">
+              <option value="0">Select Category</option>
+              <option name="Mobile" value="Mobile">Mobile</option>
+              <option name="Tablet" value="Tablet">Tablet</option>
+              <option name="Watch" value="Watch">Watch</option>
+              <option name="Laptop" value="Laptop">Laptop</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="brand" >Discription</label>
+            <textarea name="discription" placeholder="Product Discription Needed" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="image of product" ></label>
+            <input type="file" name="modelpic" /><br>
+            <input class="btn btn-default" type="submit" name="submit">
+          </div>
+          <br>
+          <br>
+      </div>
+    </form>
+  </div> <!--row-->
+</div> <!-- container -->
 {{>footer}}
