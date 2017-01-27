@@ -17,6 +17,7 @@ var product = require('../models/products_insert');
 apiRouter.route('/')
 		.post(function(req, res){
 			/*
+			* this will create a new mongoose schema new product
 			* .post will now save the data entered by the form to db
 			* which can be then access or return by .get
 			*/

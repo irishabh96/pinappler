@@ -7,21 +7,22 @@ var adminRouter = express.Router();
 
 adminRouter.route('/')
 		.get (function(req, res){
-			res.render('signin', {
-			title : 'Signin',
+			res.render('admin', {
+			title : 'admin',
 	 });
 });
 
 // admin route add model
-adminRouter.route('/addmodel')
+adminRouter.route('/add-new-product')
 		.get(function(req,res){
-			db.model.insert(url, function(err, data){
-				if (err){
-					console.log(err)
-				};
-			// attach data url console.log('data inserted')
-			});
-		});
-
-
+			res.render('admin_product_create',{
+				title: 'Welcome'
+			})
+		})
+adminRouter.route('/products')
+		.get(function(req,res){
+			res.render('admin_products',{
+				title: 'Welcome'
+			})
+		})
 module.exports = adminRouter;

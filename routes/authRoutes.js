@@ -1,11 +1,11 @@
 var express = require('express');
 var authRouter = express.Router();
-var mongodb = require('mongodb').MongoClient;
-var url = 'mongodb://127.0.0.1:27017/pinapler';
+// var mongodb = require('mongodb').MongoClient;
+// var url = 'mongodb://127.0.0.1:27017/pinapler';
 
 
 
-authRouter.route('/signup')
+authRouter.route('/')
 		.post(function (req, res) {
 			console.log(req.body);
 			var username = req.body.userName;
@@ -24,7 +24,7 @@ authRouter.route('/signup')
 			else {
 					collection.insert(user, function(err, result){
 					req.login(result, function(){
-					res.redirect('/auth/pannel');
+					res.redirect('/admin');
 					});
 				});
 			
@@ -39,9 +39,9 @@ authRouter.route('/signup')
 
 // admin route
 
-authRouter.route('/pannel')
+authRouter.route('/admin')
 		.get(function(req, res){
-			res.render('admin_product_create',{title: 'title'});
+			res.render('admin',{title: 'title'});
 	});
 
 
