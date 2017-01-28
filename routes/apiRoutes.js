@@ -4,20 +4,22 @@ var bodyParser = require('body-parser');
 var apiRouter = express.Router();
 var app = express();
 var ImageKit = require('imagekit');
+var multer = require('multer');
+var q = require('q');
  
 var imagekit = new ImageKit({
-   "imagekitId" : "demo",       
-   "apiKey" : "b4cK89DP0xXkRJJiaEp5OIa+wWk=",       
-   "apiSecret" : "GtOezbPqZRDtCj4mQDL9f25hxWc=", 
+   "imagekitId" : "rishabhbhatia",       
+   "apiKey" 	: "b4cK89DP0xXkRJJiaEp5OIa+wWk=",       
+   "apiSecret"  : "GtOezbPqZRDtCj4mQDL9f25hxWc=", 
 });
 
 var config = require('../config.js');
-var url = config.database
+var url = config.database;
 
 var db = mongoose.connect(url);
 var product = require('../models/products_insert');
 
-
+var upload = multer().single('image');
 apiRouter.route('/')
 		.post(function(req, res){
 	/*
@@ -25,6 +27,41 @@ apiRouter.route('/')
 	* .post will now save the data entered by the form to db
 	* which can be then access or return by .get
 	*/
+	upload(req, res, function(err) {
+        if(err) {
+            // res.status(500);
+            // res.send({
+            //     "exception" : true,
+            //     "statusNumber" : 500,
+            //     "statusCode" : "INTERNAL_SERVER_ERROR",
+            //     "message" : "Image file parsing failed"
+            // });
+            // return;
+            console.log(err)
+        }
+
+        var uploadPromise;
+        uploadPromise = imagekit.upload(req.file.buffer.toString('base64'), {
+            "filename" : req.file.originalname,
+            "folder" : "/images"
+        });
+       
+        //handle upload success and failure
+        uploadPromise.then(function(result) {
+            res.send(result);
+        })
+        // function(err) {
+        //     res.status(500);
+        //     res.send({
+        //         "exception" : true,
+        //         "statusNumber" : err.statusNumber,
+        //         "statusCode" : err.statusCode,
+        //         "message" : err.message
+        //     });
+        // });
+
+    });
+
 
 	var Product = new product({
 

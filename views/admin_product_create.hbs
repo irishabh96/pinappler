@@ -5,7 +5,7 @@
   <div>
     <div class="col-md-4">
         <h1>Add a Product</h1>
-        <form action="/api/products" method="post" >
+        <form action="/api/products" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="product name">Product Name</label>
             <input type="text" placeholder="Product Name" class = "form-control" name="product_name"><br>
@@ -30,7 +30,7 @@
           </div>
           <div class="form-group">
             <label for="image of product" ></label>
-            <input type="file" name="modelpic" /><br>
+            <input type="file" name="image" /><br>
             <input class="btn btn-default" type="submit" name="submit">
           </div>
           <br>
