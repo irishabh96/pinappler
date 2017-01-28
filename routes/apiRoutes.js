@@ -1,12 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
 var apiRouter = express.Router();
-var app = express();
 var ImageKit = require('imagekit');
 var multer = require('multer');
 var q = require('q');
- 
 var imagekit = new ImageKit({
    "imagekitId" : "rishabhbhatia",       
    "apiKey" 	: "b4cK89DP0xXkRJJiaEp5OIa+wWk=",       
@@ -18,64 +15,63 @@ var url = config.database;
 
 var db = mongoose.connect(url);
 var product = require('../models/products_insert');
-
 var upload = multer().single('image');
+
 apiRouter.route('/')
-		.post(function(req, res){
-	/*
-	* this will create a new mongoose schema new product
-	* .post will now save the data entered by the form to db
-	* which can be then access or return by .get
-	*/
+		.post(function(req, res, next){
+
+
+			/*
+			* this will create a new mongoose schema new product
+			* .post will now save the data entered by the form to db
+			* which can be then access or return by .get
+			*/
+
+
 	upload(req, res, function(err) {
         if(err) {
-            // res.status(500);
-            // res.send({
-            //     "exception" : true,
-            //     "statusNumber" : 500,
-            //     "statusCode" : "INTERNAL_SERVER_ERROR",
-            //     "message" : "Image file parsing failed"
-            // });
-            // return;
             console.log(err)
         }
-
+        
         var uploadPromise;
         uploadPromise = imagekit.upload(req.file.buffer.toString('base64'), {
             "filename" : req.file.originalname,
             "folder" : "/images"
         });
        
-        //handle upload success and failure
+        //handle upload success and failure of image
         uploadPromise.then(function(result) {
-            res.send(result);
+        	if(err){console.log(err)}
+            // console.log(result);
+        var url = imagekit.image(this).url();
+        	console.log(url)
         })
-        // function(err) {
-        //     res.status(500);
-        //     res.send({
-        //         "exception" : true,
-        //         "statusNumber" : err.statusNumber,
-        //         "statusCode" : err.statusCode,
-        //         "message" : err.message
-        //     });
-        // });
 
-    });
+        // console.log(req.body.brand)
 
+        	var Product = new product ({
+			"product_name" : req.body.product_name,
+			"brand" : req.body.brand,
+			"category" : req.body.category,
+			"discription" : req.body.discription
+			});
+		console.log(Product)
+		Product.save();	
+		res.status(201).send(Product);
 
-	var Product = new product({
-
-		product_name : req.body.product_name,
-		brand : req.body.brand,
-		category : req.body.category,
-		discription : req.body.discription
-	});
-
-	Product.save();
-	console.log(Product)
-	res.status(201).send(Product)
-
+	}); // upload finish
+		
 })
+
+
+    // 
+	// console.log(newProduct)
+	// 
+
+	 
+
+	
+
 
 		.get(function(req, res){
 	var query = req.query;
