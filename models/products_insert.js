@@ -14,6 +14,9 @@ var add_product = new Schema({
 	},
 	discription: {
 		type: 'String'
+	},
+	url: {
+		type: 'String'
 	}
 
 });

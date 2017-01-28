@@ -33,18 +33,20 @@ apiRouter.route('/')
             console.log(err)
         }
         
-        var uploadPromise;
+        var uploadPromise; var url;
         uploadPromise = imagekit.upload(req.file.buffer.toString('base64'), {
             "filename" : req.file.originalname,
             "folder" : "/images"
+        
         });
+
        
         //handle upload success and failure of image
         uploadPromise.then(function(result) {
         	if(err){console.log(err)}
-            // console.log(result);
-        var url = imagekit.image(this).url();
-        	console.log(url)
+        	url = result;
+            console.log(url.url);
+
         })
 
         // console.log(req.body.brand)
@@ -53,8 +55,10 @@ apiRouter.route('/')
 			"product_name" : req.body.product_name,
 			"brand" : req.body.brand,
 			"category" : req.body.category,
-			"discription" : req.body.discription
+			"discription" : req.body.discription,
+			"url" : url
 			});
+
 		console.log(Product)
 		Product.save();	
 		res.status(201).send(Product);
