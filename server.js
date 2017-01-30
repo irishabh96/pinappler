@@ -29,6 +29,8 @@ require('./config/passport_config.js') (app);
 var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
 var apiRoutes = require('./routes/apiRoutes'); //product route
+var pageRoutes = require('./routes/pageRoutes');
+app.use('/api/pages', pageRoutes);	// base url = api/pages
 app.use('/api/products', apiRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);

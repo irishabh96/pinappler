@@ -49,6 +49,7 @@ apiRouter.route('/')
 
         })
 
+
         // console.log(req.body.brand)
 
         	var Product = new product ({
@@ -86,7 +87,7 @@ apiRouter.route('/')
 	* and will .get data from db
 	*/
 
-	product.find(query, function(err, products){
+	product.findOne(query, function(err, products){
 		if(err){
 			res.status(500).send(err);
 		}
