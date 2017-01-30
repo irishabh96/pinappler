@@ -19,14 +19,13 @@ var upload = multer().single('image');
 
 apiRouter.route('/')
 		.post(function(req, res, next){
-
+		
 
 			/*
 			* this will create a new mongoose schema new product
 			* .post will now save the data entered by the form to db
 			* which can be then access or return by .get
 			*/
-
 
 	upload(req, res, function(err) {
         if(err) {
@@ -39,7 +38,6 @@ apiRouter.route('/')
             "folder" : "/images"
         
         });
-
        
         //handle upload success and failure of image
         uploadPromise.then(function(result) {
@@ -50,63 +48,77 @@ apiRouter.route('/')
         })
 
 
-        // console.log(req.body.brand)
+      product.findOne({product_name: req.body.product_name}, function(err, productItem) {
+		    if (err) {
+		        console.log("MongoDB Error: " + err);
+		        return false;
+		    }
+			    if (!productItem) {
+			        console.log("No item found, creating product item");
 
-        	var Product = new product ({
-			"product_name" : req.body.product_name,
-			"brand" : req.body.brand,
-			"category" : req.body.category,
-			"discription" : req.body.discription,
-			"url" : url
-			});
+			        product.create(
+			            {
+			                product_name: req.body.product_name,
+			                brand: req.body.brand,
+			                category: req.body.category,
+			                discription: req.body.discription,
+			                url: url
+			                
+			            }, function(err, createdItem) {
+			                if (err) {
+			                    console.log("MongoDB Error: " + err);
+			                    return null; 
+			                }
+			                else {
+			                	
+			                	res.status(200).json(createdItem)
+			                }
+			            }
+			        );
+			    }
+    		else {
+        // console.log("Found one product item: " + productItem.product_name);
+        		res.json(productItem)
+        
+    		}
+    return true;
+	})
 
-		console.log(Product)
-		Product.save();	
-		res.status(201).send(Product);
 
-	}); // upload finish
+}); // upload finish
 		
 })
 
 
-    // 
-	// console.log(newProduct)
-	// 
-
-	 
-
-	
-
-
 		.get(function(req, res){
-	var query = req.query;
-	/* 
-	* this query will filter products from url
-	* like api/products?brand=apple
-	* brand=apple is the query in url
-	* and will .get data from db
-	*/
+				var query = req.query;
+						/* 
+						* this query will filter products from url
+						* like api/products?brand=apple
+						* brand=apple is the query in url
+						* and will .get data from db
+						*/
 
-	product.findOne(query, function(err, products){
-		if(err){
-			res.status(500).send(err);
-		}
-		else {
-			res.json(products)
-		}
-	});
-
-});
-
-apiRouter.route('/:id')
-		.get(function(req, res){
-			product.findById(req.params.id, function(err, product){
-				if(err){
-					res.status(500).send(err);
-				}
-				else {
-					res.json(product)
-				}
+		product.find(query, function(err, products){
+			if(err){
+				res.status(500).send(err);
+			}
+			else {
+				res.json(products)
+			}
 			});
+
+		});
+
+		apiRouter.route('/:id')
+				.get(function(req, res){
+					product.findById(req.params.id, function(err, product){
+						if(err){
+							res.status(500).send(err);
+						}
+						else {
+							res.json(product)
+						}
+				});
 		});
 module.exports = apiRouter
