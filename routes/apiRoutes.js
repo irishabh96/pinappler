@@ -42,13 +42,13 @@ apiRouter.route('/')
         //handle upload success and failure of image
         uploadPromise.then(function(result) {
         	if(err){console.log(err)}
-        	url = result;
+        	url = result;  //have to add url to mongodb
             console.log(url.url);
 
         })
 
 
-      product.findOne({product_name: req.body.product_name}, function(err, productItem) {
+        product.findOne({product_name: req.body.product_name}, function(err, productItem) {
 		    if (err) {
 		        console.log("MongoDB Error: " + err);
 		        return false;
@@ -77,7 +77,7 @@ apiRouter.route('/')
 			        );
 			    }
     		else {
-        // console.log("Found one product item: " + productItem.product_name);
+        		// console.log("Found one product item: " + productItem.product_name);
         		res.json(productItem)
         
     		}

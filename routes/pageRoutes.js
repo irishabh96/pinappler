@@ -10,18 +10,39 @@ var page = require('../models/page_insert');
 
 pageRouter.route('/')
 		.post(function(req, res){
+			page.findOne({page_name: req.body.page_name}, function(err, item){
+				if (err){
+					console.log('Mongodb err: ' + err)
+				}
+				if(!item){
+					console.log('No such Page found , creating page..')
 
-			var Page = new page ({
+					page.create(
+						{
 
-				"page_name" : req.body.page_name,
-				"page_title" : req.body.page_title 
+							page_name : req.body.page_name,
+							page_title : req.body.page_title 
 
-			});
-			console.log(Page)
-			Page.save();	
-			res.status(201).send(Page);
+						}, function(err , createditem){
+							if (err){
+								console.log('mongo err' + err)
+							}
+							else{
+								console.log('Created Successfully')
+								res.status(200).json(createditem)
+							}
 
-		})
+						}
+					);
+				}
+				else {
+					console.log(req.body.page_name + ' Already Exits')
+					res.json(item)
+				}
+				return true;
+			}) // query ending here
+		
+		}) // post end here
 		.get(function(req, res){
 			page.find(function(err, pages){
 				if(err){
