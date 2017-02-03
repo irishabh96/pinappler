@@ -1,15 +1,20 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var URLSlugs = require('mongoose-url-slugs');
 var add_page = new Schema({
 
 	page_name: {
-		type: 'String'
+		type: 'String',
+		 default: '', 
+		 trim: true
 	},
 	page_title: {
-		type: 'String'
+		type: 'String',
+		 default: '', 
+		 trim: true
 	}
 
 });
+add_page.plugin(URLSlugs('page_name page_title', {field: 'myslug'}));
 
 module.exports = mongoose.model('pages', add_page);

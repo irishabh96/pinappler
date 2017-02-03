@@ -19,7 +19,9 @@ var upload = multer().single('image');
 
 apiRouter.route('/')
 		.post(function(req, res, next){
-		
+
+			// console.log(parsing.toString())
+			//
 
 			/*
 			* this will create a new mongoose schema new product
@@ -46,9 +48,14 @@ apiRouter.route('/')
             console.log(url.url);
 
         })
+        var parsing = req.body.product_name;
+		// console.log(parsing);
+	 	var str = parsing.toString()
+		slug = str.replace(/[,]/g, '-').toLowerCase();
+		// console.log(slug);
 
 
-        product.findOne({product_name: req.body.product_name}, function(err, productItem) {
+        product.findOne({myslug: slug}, function(err, productItem) {
 		    if (err) {
 		        console.log("MongoDB Error: " + err);
 		        return false;
@@ -77,7 +84,7 @@ apiRouter.route('/')
 			        );
 			    }
     		else {
-        		// console.log("Found one product item: " + productItem.product_name);
+        		console.log("Enter a unique slug .. Found one product item " );
         		res.json(productItem)
         
     		}

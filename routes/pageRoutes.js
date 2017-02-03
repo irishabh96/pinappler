@@ -10,7 +10,14 @@ var page = require('../models/page_insert');
 
 pageRouter.route('/')
 		.post(function(req, res){
-			page.findOne({page_name: req.body.page_name}, function(err, item){
+			var parsing = [req.body.page_name,
+						req.body.page_title];
+			// console.log(parsing.toString())
+			var str = parsing.toString()
+			slug = str.replace(/[,]/g, '-').toLowerCase();
+			console.log(slug);
+
+			page.findOne({myslug: slug}, function(err, item){
 				if (err){
 					console.log('Mongodb err: ' + err)
 				}
@@ -36,7 +43,7 @@ pageRouter.route('/')
 					);
 				}
 				else {
-					console.log(req.body.page_name + ' Already Exits')
+					console.log(req.body.page_name + ' ' + req.body.page_title + ' This slug Already Exits enter a unique slug')
 					res.json(item)
 				}
 				return true;
