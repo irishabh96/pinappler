@@ -10,14 +10,17 @@ var page = require('../models/page_insert');
 
 pageRouter.route('/')
 		.post(function(req, res){
-			var parsing = [req.body.page_name,
-						req.body.page_title];
+			// var parsing = [req.body.page_name,
+			// 			req.body.page_title];
 			// console.log(parsing.toString())
-			var str = parsing.toString()
-			slug = str.replace(/[,]/g, '-').toLowerCase();
+			// var str = parsing.toString()
+			// slug = str.replace(/[,]/g, '-').toLowerCase();
+			var slug = req.body.slug
 			console.log(slug);
-
-			page.findOne({myslug: slug}, function(err, item){
+			var query = {
+				myslug: slug
+			};
+			page.findOne(query, function(err, item){
 				if (err){
 					console.log('Mongodb err: ' + err)
 				}
@@ -28,7 +31,8 @@ pageRouter.route('/')
 						{
 
 							page_name : req.body.page_name,
-							page_title : req.body.page_title 
+							page_title : req.body.page_title,
+							myslug: req.body.slug 
 
 						}, function(err , createditem){
 							if (err){
@@ -36,15 +40,16 @@ pageRouter.route('/')
 							}
 							else{
 								console.log('Created Successfully')
-								res.status(200).json(createditem)
+								// res.status(200).json(createditem)
+								res.redirect('/admin/pages')
 							}
 
 						}
 					);
 				}
 				else {
-					console.log(req.body.page_name + ' ' + req.body.page_title + ' This slug Already Exits enter a unique slug')
-					res.json(item)
+					console.log(item.myslug + ' This slug Already Exits enter a unique slug')
+					res.send('"' + item.myslug +'"' +' this slug already exits')
 				}
 				return true;
 			}) // query ending here

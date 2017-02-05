@@ -18,10 +18,15 @@ var add_product = new Schema({
 	discription: {
 		type: 'String'
 	},
+	myslug: {
+		type: 'String',
+		 default: '', 
+		 trim: true
+	},
 	url: {
 		type: 'String'
 	}
 
 });
-add_product.plugin(URLSlugs('product_name', {field: 'myslug'}));
+// add_product.plugin(URLSlugs('product_name', {field: 'myslug'}));
 module.exports = mongoose.model('products', add_product);

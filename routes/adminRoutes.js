@@ -21,11 +21,23 @@ adminRouter.route('/add-new-product')
 		});
 adminRouter.route('/products')
 		.get(function(req,res){
-			res.render('admin_products',{
-				title: 'Welcome'
+			res.render('pages',{
+				title: 'Products'
 			});
 		});
-adminRouter.route('/add-new-page')
+
+adminRouter.route('/pages')
+		.get(function(req, res){
+			res.render('pages',{
+				title: 'All pages',
+				th_name: 'Page Name',
+				th_title: 'Page Title',
+				th_slug: 'Slug'
+			});
+		});
+
+// add page render		
+adminRouter.route('/pages/add')
 		.get(function(req, res){
 			res.render('admin_page_add',{
 				title: 'add a page'
