@@ -1,7 +1,14 @@
 var express = require('express');
 var adminRouter = express.Router();
-// var mongodb = require('mongojs');
-// var db = require('./db.js');
+var mongoose = require('mongoose');
+var Handlebars 		= require('hbs');
+
+var config = require('../config.js');
+var url = config.database;
+
+var db = mongoose.createConnection(url);
+var page = require('../models/page_insert');
+var product = require('../models/products_insert');
 
 
 
@@ -13,26 +20,38 @@ adminRouter.route('/')
 });
 
 // admin route add model
-adminRouter.route('/add-new-product')
+adminRouter.route('/products/add')
 		.get(function(req,res){
 			res.render('admin_product_create',{
 				title: 'Welcome'
 			});
 		});
+
+var data;
+product.find({}, function(err, result){
+	if(err){
+		console.log(err)
+	}
+		data = result;
+})
 adminRouter.route('/products')
 		.get(function(req,res){
-			res.render('pages',{
-				title: 'Products'
+		    // var thead = {
+		    // 	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug']
+		    // }
+			res.render('tableContent', {
+				title: 'products',
+		    	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug'],
+		    	data: data,
+		    	
 			});
 		});
 
 adminRouter.route('/pages')
 		.get(function(req, res){
-			res.render('pages',{
+			res.render('tableContent',{
 				title: 'All pages',
-				th_name: 'Page Name',
-				th_title: 'Page Title',
-				th_slug: 'Slug'
+				thead: ['Name', 'Title', 'Slug']
 			});
 		});
 
@@ -40,7 +59,7 @@ adminRouter.route('/pages')
 adminRouter.route('/pages/add')
 		.get(function(req, res){
 			res.render('admin_page_add',{
-				title: 'add a page'
+				title: 'Add a page'
 			});
 		});
 module.exports = adminRouter;

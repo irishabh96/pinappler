@@ -10,11 +10,11 @@ var passport = require('passport');
 var session = require('express-session');
 // var apiRoutes   = express.Router();
 //public directory
-app.use(express.static(__dirname + '/public'));
+
 app.set('views', path.join(__dirname, 'views')); // register view
 app.set('view engine','hbs'); //hbs
 hbs.registerPartials(__dirname + '/views/partials'); // registering partials
-
+app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
 	res.send('switch to /auth/pannel or /admin')
 })
@@ -30,12 +30,13 @@ var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
 var productRoutes = require('./routes/productRoutes'); //product route
 var pageRoutes = require('./routes/pageRoutes');
+var editRoutes = require('./routes/editRoutes');
 app.use('/api/pages', pageRoutes);	// base url = api/pages
 app.use('/api/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
-
-var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+app.use('/edit', editRoutes);
+// var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 // var config = require('./config/config.js'); // get our config file
 // var User   = require('./models/user');
 

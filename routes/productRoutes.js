@@ -19,7 +19,8 @@ var upload = multer().single('image');
 
 apiRouter.route('/')
 		.post(function(req, res, next){
-
+			var img_url ;
+			var imagekit_url;
 			/*
 			* this will create a new mongoose schema new product
 			* .post will now save the data entered by the form to db
@@ -41,16 +42,14 @@ apiRouter.route('/')
         //handle upload success and failure of image
         uploadPromise.then(function(result) {
         	if(err){console.log(err)}
-        	url = result;  //have to add url to mongodb
-            console.log(url.url);
+        	imagekit_url = result;  //have to add url to mongodb
+            console.log(imagekit_url.url);
+            img_url = url.url;
+            return(img_url)
 
         })
         var slug = req.body.slug;
 
-		// console.log(parsing);
-	 	// 	var str = parsing.toString()
-		// slug = str.replace(/[,]/g, '-').toLowerCase();
-		// console.log(slug);
 		var query = {
 			'myslug': slug
 		};
@@ -70,7 +69,7 @@ apiRouter.route('/')
 			                category: req.body.category,
 			                discription: req.body.discription,
 			                myslug: req.body.slug,
-			                url: url
+			                url: img_url
 			                
 			            }, function(err, createdItem) {
 			                if (err) {

@@ -15,7 +15,7 @@ $.ajax({
 		console.log(products)
  		for(i=0; i < products.length ; i++){
  			var product = products[i];
- 			$('#page_data').append('<tr><td>'+product.product_name+'</td>'+'<td>'+product.brand+'</td>'+'<td>'+product.category+'</td>'+'<td>'+product.discription+'</td>'+'<td>'+product.myslug+'</td>'+'<td>'+product.url+'</td></tr>')
+ 			$('#product_data').append('<tr><td>'+product.product_name+'</td>'+'<td>'+product.brand+'</td>'+'<td>'+product.category+'</td>'+'<td>'+product.discription+'</td>'+'<td>'+product.myslug+'</td>'+'<td>'+product.url+'</td></tr>')
  		}
 	}
 });

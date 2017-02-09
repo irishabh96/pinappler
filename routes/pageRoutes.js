@@ -10,11 +10,6 @@ var page = require('../models/page_insert');
 
 pageRouter.route('/')
 		.post(function(req, res){
-			// var parsing = [req.body.page_name,
-			// 			req.body.page_title];
-			// console.log(parsing.toString())
-			// var str = parsing.toString()
-			// slug = str.replace(/[,]/g, '-').toLowerCase();
 			var slug = req.body.slug
 			console.log(slug);
 			var query = {
