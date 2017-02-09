@@ -28,30 +28,44 @@ adminRouter.route('/products/add')
 		});
 
 var data;
-product.find({}, function(err, result){
+product.find({}, function(err, results){
 	if(err){
 		console.log(err)
 	}
-		data = result;
+	else if(results) {	
+		data = results;
+	}
+
 })
 adminRouter.route('/products')
 		.get(function(req,res){
-		    // var thead = {
-		    // 	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug']
-		    // }
+		    var thead = {
+		    	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug']
+		    }
 			res.render('tableContent', {
 				title: 'products',
 		    	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug'],
 		    	data: data,
-		    	
-			});
-		});
 
+			});
+				 	
+		})
+var page_data;
+page.find({}, function(err, results){
+	if(err){
+		console.log(err)
+	}
+	else if(results) {	
+		page_data = results;
+	}
+
+})
 adminRouter.route('/pages')
 		.get(function(req, res){
 			res.render('tableContent',{
 				title: 'All pages',
-				thead: ['Name', 'Title', 'Slug']
+				thead: ['Name', 'Title', 'Slug'],
+				page_data: page_data,
 			});
 		});
 

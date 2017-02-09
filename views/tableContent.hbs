@@ -12,6 +12,7 @@
         </tr>
       </thead>
       <tbody>
+      {{#if data}}
       	 {{#each data}}
             <tr>
               <td>{{this.product_name}}</td>
@@ -21,6 +22,16 @@
               <td>{{this.myslug}}</td>
             </tr> 
           {{/each}}
+        {{else}}
+          {{#each page_data}}
+            <tr>
+              <td>{{this.page_name}}</td>
+              <td>{{this.page_title}}</td>
+              <td>{{this.myslug}}</td>
+              
+            </tr> 
+          {{/each}}
+        {{/if}}  
       </tbody>
     </table>
 
