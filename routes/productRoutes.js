@@ -49,8 +49,7 @@ apiRouter.route('/')
 
         })
         var slug = req.body.slug;
-
-		var query = {
+        var query = {
 			'myslug': slug
 		};
 

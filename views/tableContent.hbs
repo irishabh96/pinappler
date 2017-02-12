@@ -14,12 +14,16 @@
       <tbody>
       {{#if data}}
       	 {{#each data}}
-            <tr>
+            <tr id= '{{this.myslug}}'>
               <td>{{this.product_name}}</td>
               <td>{{this.brand}}</td>
               <td>{{this.category}}</td>
               <td>{{this.discription}}</td>
               <td>{{this.myslug}}</td>
+              <td>
+              <a href="/admin/edit"><span class="glyphicon glyphicon-check"></span></a>
+              <span class="glyphicon glyphicon-remove-circle"></span>
+              </td>
             </tr> 
           {{/each}}
         {{else}}
