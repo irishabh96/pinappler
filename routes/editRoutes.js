@@ -26,32 +26,24 @@ editRouter.use('/:id', function(req, res, next){
 	});
 })
 
+// get and put
+
 editRouter.route('/:id')
 	.get(function(req, res){
 		res.json(req.product)
 			
-})
+	})
+	
 	.put(function(req, res){
 		// getting data
-			var query = {
-				'myslug': req.params.id
-			}
-			product.findOne(query, function(err, item){
-			if(err){
-				res.status(500).send(err)
-			}
-			else{
+				req.product.product_name = req.body.product_name,
+                req.product.brand = req.body.brand,
+                req.product.category = req.body.category,
+                req.product.discription = req.body.discription,
+                req.product.myslug = req.body.myslug
 
-				item.product_name = req.body.product_name,
-                item.brand = req.body.brand,
-                item.category = req.body.category,
-                item.discription = req.body.discription,
-                item.myslug = req.body.myslug
-
-            	item.save();
-                res.json(item)
-			}
-		})
+            	req.product.save();
+                res.json(req.product)
 
 	});
 
