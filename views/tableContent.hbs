@@ -21,7 +21,7 @@
               <td>{{this.discription}}</td>
               <td>{{this.myslug}}</td>
               <td>
-              <a href="/admin/edit"><span class="glyphicon glyphicon-check"></span></a>
+              <a href="/admin/edit/this.myslug"><span class="glyphicon glyphicon-check"></span></a>
               <span class="glyphicon glyphicon-remove-circle"></span>
               </td>
             </tr> 
@@ -29,6 +29,7 @@
         {{else}}
           {{#each page_data}}
             <tr>
+            
               <td>{{this.page_name}}</td>
               <td>{{this.page_title}}</td>
               <td>{{this.myslug}}</td>

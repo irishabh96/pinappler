@@ -11,7 +11,7 @@ editRouter.use('/:id', function(req, res, next){
 		var query = {
 				'myslug': req.params.id
 			}
-	product.findOne(query, function(err, product){
+		product.findOne(query, function(err, product){
 		if (err) {
 			console.log("mongoDb Err: " + err)
 		}
@@ -33,7 +33,7 @@ editRouter.route('/:id')
 		res.json(req.product)
 			
 	})
-	
+
 	.put(function(req, res){
 		// getting data
 				req.product.product_name = req.body.product_name,
