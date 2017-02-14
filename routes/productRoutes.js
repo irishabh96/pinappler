@@ -50,7 +50,7 @@ apiRouter.route('/')
         })
         var slug = req.body.slug;
         var query = {
-			'myslug': slug
+			'slug': slug
 		};
 
         product.findOne(query, function(err, productItem) {
@@ -67,7 +67,7 @@ apiRouter.route('/')
 			                brand: req.body.brand,
 			                category: req.body.category,
 			                discription: req.body.discription,
-			                myslug: req.body.slug,
+			                slug: req.body.slug,
 			                url: img_url
 			                
 			            }, function(err, createdItem) {
@@ -84,7 +84,7 @@ apiRouter.route('/')
 			    }
     		else {
         		console.log("Enter a unique slug .. Found one product item " );
-        		res.send('This slug "' + productItem.myslug + '" alredy exits in database')
+        		res.send('This slug "' + productItem.slug + '" alredy exits in database')
         
     		}
     return true;

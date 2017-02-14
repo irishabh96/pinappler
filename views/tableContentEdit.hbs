@@ -1,0 +1,30 @@
+{{>header}}
+
+<div class="container-fluid">
+	
+	<div class="col-md-4">
+		<div>
+			<h1>Edit {{data.slug}}</h1>
+			<form action="/edit/{{data.slug}}" method="post">
+				<div class="form-group">
+					<label for="page name">Page Name</label>
+	         		<input type="text" class = "form-control" name="page_name" value="{{data.page_name}}" ><br>
+        		</div>
+        		<div class="form-group">
+        			<label for="page title">Page title</label>
+					<input type="text" class ="form-control" name="page_title" value="{{data.page_title}}">
+        		</div>
+        		<div class="form-group">
+        			<label for="Slug">Slug</label>
+					<input type="text" class ="form-control" placeholder="Slug" name="slug" value="{{data.slug}}">
+        		</div>
+        		<div>
+        			<input class="btn btn-default" type="submit" name="submit">
+        		</div>
+			</form>
+		</div>
+	</div> <!-- row -->
+	
+</div> <!-- container -->
+
+{{>footer}}

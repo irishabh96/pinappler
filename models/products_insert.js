@@ -18,7 +18,7 @@ var add_product = new Schema({
 	discription: {
 		type: 'String'
 	},
-	myslug: {
+	slug: {
 		type: 'String',
 		 default: '', 
 		 trim: true

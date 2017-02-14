@@ -19,12 +19,22 @@ adminRouter.route('/')
 	 });
 });
 
-adminRouter.route('/edit')
+var pageData;
+adminRouter.route('/edit/:slug')
 		.get (function(req, res){
-			res.render('tableContent', {
-			title : 'Tables Edit',
-	 });
-});
+		var query = {
+				'slug': req.params.slug
+			}
+			
+			page.findOne(query, function(err, result){
+				pageData = result;
+			})
+			res.render('tableContentEdit', {
+				title: 'Pages',
+		    	data: pageData
+
+			});
+	 	});
 
 /* 
 

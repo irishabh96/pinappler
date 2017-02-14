@@ -13,7 +13,7 @@ pageRouter.route('/')
 			var slug = req.body.slug
 			console.log(slug);
 			var query = {
-				myslug: slug
+				slug: slug
 			};
 			page.findOne(query, function(err, item){
 				if (err){
@@ -27,7 +27,7 @@ pageRouter.route('/')
 
 							page_name : req.body.page_name,
 							page_title : req.body.page_title,
-							myslug: req.body.slug 
+							slug: req.body.slug 
 
 						}, function(err , createditem){
 							if (err){
@@ -43,8 +43,8 @@ pageRouter.route('/')
 					);
 				}
 				else {
-					console.log(item.myslug + ' This slug Already Exits enter a unique slug')
-					res.send('"' + item.myslug +'"' +' this slug already exits')
+					console.log(item.slug + ' This slug Already Exits enter a unique slug')
+					res.send('"' + item.slug +'"' +' this slug already exits')
 				}
 				return true;
 			}) // query ending here

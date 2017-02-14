@@ -13,7 +13,7 @@ var add_page = new Schema({
 		 default: '', 
 		 trim: true
 	},
-	myslug: {
+	slug: {
 		type: 'String',
 		 default: '', 
 		 trim: true
