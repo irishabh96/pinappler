@@ -3,8 +3,8 @@ var editRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('../config.js');
-// var url = config.database;
-// var db = mongoose.createConnection(url);
+var url = config.database;
+var db = mongoose.createConnection(url);
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
 
@@ -57,7 +57,7 @@ editRouter.route('/:slug')
                 productItem.brand = req.body.brand,
                 productItem.category = req.body.category,
                 productItem.discription = req.body.discription,
-                productItem.slug = req.body.newSlug
+                productItem.slug = req.body.slug
 
                 productItem.save(function(err){
                 	if(err){
