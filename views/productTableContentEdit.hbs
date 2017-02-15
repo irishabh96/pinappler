@@ -1,0 +1,38 @@
+{{>header}}
+
+<div class="container-fluid">
+	
+	<div class="col-md-4">
+		<div>
+			<h1>Edit {{data.slug}}</h1>
+			<form action="/edit/{{data.slug}}" method="POST">
+				<div class="form-group">
+					<label for="product_name">Product Name</label>
+	         		<input type="text" class = "form-control" name="product_name" value="{{data.product_name}}" ><br>
+        		</div>
+        		<div class="form-group">
+        			<label for="brand">Brand</label>
+					<input type="text" class ="form-control" name="brand" value="{{data.brand}}">
+        		</div>
+        		<div class="form-group">
+        			<label for="Category">Category</label>
+					<input type="text" class ="form-control" name="category" value="{{data.category}}">
+        		</div>
+        		<div class="form-group">
+        			<label for="Discription">Discription</label>
+					<input type="text" class ="form-control" name="Discription" value="{{data.discription}}">
+        		</div>
+        		<div class="form-group">
+        			<label for="Slug">Slug</label>
+					<input type="text" class ="form-control" name="slug" value="{{data.slug}}">
+        		</div>
+        		<div>
+        			<input class="btn btn-default" type="submit" name="submit">
+        		</div>
+			</form>
+		</div>
+	</div> <!-- row -->
+	
+</div> <!-- container -->
+
+{{>footer}}

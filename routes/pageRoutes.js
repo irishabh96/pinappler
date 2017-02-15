@@ -56,7 +56,11 @@ pageRouter.route('/')
 					res.status(500).send(err);
 				}
 				else {
-					res.json(pages)
+					res.render('pageTableContent',{
+						title: 'Pages',
+						thead: ['Name', 'Title', 'Slug'],
+						page_data: pages
+					});
 				}
 			});
 		});

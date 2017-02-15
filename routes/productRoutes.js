@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var apiRouter = express.Router();
 var ImageKit = require('imagekit');
 var multer = require('multer');
-var dotenv = require('dotenv');
 var q = require('q');
 var imagekit = new ImageKit({
    "imagekitId" : "rishabhbhatia",       
@@ -15,6 +14,7 @@ var config = require('../config.js');
 var url = config.database;
 var db = mongoose.connect(url);
 var product = require('../models/products_insert');
+
 var upload = multer().single('image');
 
 apiRouter.route('/')
@@ -76,8 +76,8 @@ apiRouter.route('/')
 			                    return null; 
 			                }
 			                else {
-			                	
-			                	res.status(200).json(createdItem)
+			                	console.log('created' + createdItem)
+			                	res.redirect('/admin/products')
 			                }
 			            }
 			        );
@@ -110,11 +110,16 @@ apiRouter.route('/')
 				res.status(500).send(err);
 			}
 			else {
-				res.json(products)
-			}
-			});
+				res.render('productTableContent', {
+				title: 'Products',
+		    	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug'],
+		    	data: products
 
+				});
+			}
 		});
+
+	});
 
 		apiRouter.route('/:id')
 				.get(function(req, res){

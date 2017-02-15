@@ -31,11 +31,11 @@ var authRoutes = require('./routes/authRoutes');
 var productRoutes = require('./routes/productRoutes'); //product route
 var pageRoutes = require('./routes/pageRoutes');
 var editRoutes = require('./routes/editRoutes');
-app.use('/api/pages', pageRoutes);	// base url = api/pages
-app.use('/api/products', productRoutes);
+app.use('/admin/pages', pageRoutes);	// base url = api/pages
+app.use('/admin/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
-app.use('/edit', editRoutes);
+app.use('/admin/edit', editRoutes);
 // var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 // var config = require('./config/config.js'); // get our config file
 // var User   = require('./models/user');

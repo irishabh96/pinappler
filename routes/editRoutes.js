@@ -3,8 +3,8 @@ var editRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('../config.js');
-var url = config.database;
-var db = mongoose.createConnection(url);
+// var url = config.database;
+// var db = mongoose.createConnection(url);
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
 // editRouter.use('/:slug', function(req, res, next){
@@ -55,13 +55,19 @@ editRouter.route('/:slug')
 			}
 		product.findOne(query, function(err, productItem){
 			if(productItem){
-				res.json(productItem)
+				res.render('productTableContentEdit', {
+					title: 'Product',
+			    	data: productItem
+				});
 			}
 			if(!productItem){
 				page.findOne(query, function(err, pageItem){
-					if (pageItem) {
+					if(pageItem) {
 						
-						res.json(pageItem)
+						res.render('pageTableContentEdit', {
+							title: 'Pages',
+					    	data: pageItem
+						});
 					}
 					else{
 							console.log('no slug in page')
@@ -81,11 +87,12 @@ editRouter.route('/:slug')
 			}
 		product.findOne(query, function(err, productItem){
 			if(productItem){
+
 				productItem.product_name = req.body.product_name,
                 productItem.brand = req.body.brand,
                 productItem.category = req.body.category,
                 productItem.discription = req.body.discription,
-                productItem.slug = req.body.slug
+                productItem.slug = req.body.newSlug
 
                 productItem.save(function(err){
                 	if(err){
@@ -95,6 +102,7 @@ editRouter.route('/:slug')
                 		res.redirect('/admin/products')
                 	}
                 })
+                
 			}
 			if(!productItem){
 				page.findOne(query, function(err, pageItem){
