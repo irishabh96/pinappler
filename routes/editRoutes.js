@@ -7,45 +7,7 @@ var config = require('../config.js');
 // var db = mongoose.createConnection(url);
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
-// editRouter.use('/:slug', function(req, res, next){
-// 		var query = {
-// 				'slug': req.params.slug
-// 			}
-// 		product.findOne(query, function(err, product){
-// 		if (err) {
-// 			console.log("mongoDb Err: " + err)
-// 		}
-// 		if(product){
-// 			req.product = product;
-// 			next();
-// 		}
-// 		else{
-			
-// 			res.status(404).send('No Such Slug Found');
-// 		}
-// 	});
-// })
 
-// // get and put
-
-// editRouter.route('/:slug')
-// 	.get(function(req, res){
-// 		res.json(req.product)
-			
-// 	})
-
-// 	.put(function(req, res){
-// 		// getting data
-// 				   req.product.product_name = req.body.product_name,
-//                 req.product.brand = req.body.brand,
-//                 req.product.category = req.body.category,
-//                 req.product.discription = req.body.discription,
-//                 req.product.slug = req.body.slug
-
-//             	req.product.save();
-//                 res.json(req.product)
-
-// 	});
 
 editRouter.route('/:slug')
 	
@@ -60,6 +22,9 @@ editRouter.route('/:slug')
 			    	data: productItem
 				});
 			}
+			/*
+			* if it found slug in products it renders that else render pages
+			*/
 			if(!productItem){
 				page.findOne(query, function(err, pageItem){
 					if(pageItem) {

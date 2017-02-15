@@ -1,7 +1,6 @@
 var express = require('express');
 var adminRouter = express.Router();
 var mongoose = require('mongoose');
-var Handlebars = require('hbs');
 var config = require('../config.js');
 var url = config.database;
 var db = mongoose.createConnection(url);
@@ -17,8 +16,7 @@ adminRouter.route('/')
 	 });
 });
 
-var data;
-/* Products Add and view Routes*/
+/* Products and pages Add */
 
 adminRouter.route('/products/add')
 		.get(function(req,res){
