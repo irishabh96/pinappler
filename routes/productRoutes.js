@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var apiRouter = express.Router();
 var ImageKit = require('imagekit');
 var multer = require('multer');
+var dotenv = require('dotenv');
 var q = require('q');
 var imagekit = new ImageKit({
    "imagekitId" : "rishabhbhatia",       
@@ -12,7 +13,6 @@ var imagekit = new ImageKit({
 
 var config = require('../config.js');
 var url = config.database;
-
 var db = mongoose.connect(url);
 var product = require('../models/products_insert');
 var upload = multer().single('image');

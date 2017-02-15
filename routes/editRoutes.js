@@ -75,7 +75,7 @@ editRouter.route('/:slug')
 		})
 	})
 
-	.put(function(req, res){
+	.post(function(req, res){
 		var query = {
 				'slug': req.params.slug
 			}
@@ -92,12 +92,12 @@ editRouter.route('/:slug')
                 		res.status(500).send(err);
                 	}
                 	else{
-                		res.json(productItem)
+                		res.redirect('/admin/products')
                 	}
                 })
 			}
 			if(!productItem){
-				page.findOne(query, {upsert:true}, function(err, pageItem){
+				page.findOne(query, function(err, pageItem){
 					if (pageItem) {
 						
 						pageItem.page_name = req.body.page_name,
@@ -109,7 +109,7 @@ editRouter.route('/:slug')
 								res.status(500).send(err);
 							}
 							else{
-								res.redirect('/admin')
+								res.redirect('/admin/pages')
 							}
 						})
 					}

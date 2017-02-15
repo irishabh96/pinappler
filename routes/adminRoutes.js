@@ -1,11 +1,10 @@
 var express = require('express');
 var adminRouter = express.Router();
 var mongoose = require('mongoose');
-var Handlebars 		= require('hbs');
-
+var Handlebars = require('hbs');
 var config = require('../config.js');
-var url = config.database;
 
+var url = config.database;
 var db = mongoose.createConnection(url);
 var page = require('../models/page_insert');
 var product = require('../models/products_insert');

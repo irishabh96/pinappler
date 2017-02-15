@@ -8,7 +8,7 @@ var hbs 		= require('hbs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
-// var apiRoutes   = express.Router();
+
 //public directory
 
 app.set('views', path.join(__dirname, 'views')); // register view
