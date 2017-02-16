@@ -1,13 +1,11 @@
 {
   "name": "pineapler",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "rishabh",
   "dependencies": {
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",

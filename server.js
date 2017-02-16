@@ -41,11 +41,12 @@ app.use('/admin/edit', editRoutes);
 // var User   = require('./models/user');
 
 //port and database
-var port = process.env.PORT || 3000 ;
+// var port = process.env.PORT || 3000 ;
 // mongoose.connect(config.database);
 
 
 
-app.listen(port ,function(){
-	console.log('listening to port specified ' + port)
-});
+// app.listen(port ,function(){
+// 	console.log('listening to port specified ' + port)
+// });
+module.exports = app;
