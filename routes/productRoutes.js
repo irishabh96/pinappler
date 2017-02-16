@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var apiRouter = express.Router();
+var productRouter = express.Router();
 var ImageKit = require('imagekit');
 var multer = require('multer');
 var q = require('q');
@@ -17,7 +17,7 @@ var product = require('../models/products_insert');
 
 var upload = multer().single('image');
 
-apiRouter.route('/')
+productRouter.route('/')
 		.post(function(req, res, next){
 			var img_url ;
 			var imagekit_url;
@@ -76,7 +76,6 @@ apiRouter.route('/')
 			                    return null; 
 			                }
 			                else {
-			                	console.log('created' + createdItem)
 			                	res.redirect('/admin/products')
 			                }
 			            }
@@ -121,15 +120,4 @@ apiRouter.route('/')
 
 	});
 
-		apiRouter.route('/:id')
-				.get(function(req, res){
-					product.findById(req.params.id, function(err, product){
-						if(err){
-							res.status(500).send(err);
-						}
-						else {
-							res.json(product)
-						}
-				});
-		});
-module.exports = apiRouter
+module.exports = productRouter

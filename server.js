@@ -31,7 +31,7 @@ var authRoutes = require('./routes/authRoutes');
 var productRoutes = require('./routes/productRoutes'); //product route
 var pageRoutes = require('./routes/pageRoutes');
 var editRoutes = require('./routes/editRoutes');
-app.use('/admin/pages', pageRoutes);	// base url = api/pages
+app.use('/admin/pages', pageRoutes);	// base url = admin/pages
 app.use('/admin/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
@@ -43,9 +43,6 @@ app.use('/admin/edit', editRoutes);
 //port and database
 var port = process.env.PORT || 3000 ;
 // mongoose.connect(config.database);
-
-
-
 
 
 

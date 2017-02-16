@@ -61,10 +61,10 @@ editRouter.route('/:slug')
 
                 productItem.save(function(err){
                 	if(err){
-                		res.status(500).send(err);
+                		res.status(500).send('mongo err ' + err);
                 	}
                 	else{
-                		res.redirect('/admin/products')
+                		res.json(productItem)
                 	}
                 })
                 
