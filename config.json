@@ -1,0 +1,26 @@
+{
+  "development": {
+    "uri": "mongodb://localhost:27017/pineappler",
+    "opts": {
+      "replset": {
+        "rs_name": "pineappler",
+        "readPreference": "secondaryPreferred",
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      }
+    }
+  },
+  "production": {
+    "uri": "mongodb://root:root@ds153699.mlab.com:53699/pineappler",
+    "opts": {
+      "replset": {
+        "rs_name": "pineappler",
+        "readPreference": "secondaryPreferred",
+        "socketOptions": {
+          "keepAlive": 1
+        }
+      }
+    }
+  }
+}

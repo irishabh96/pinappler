@@ -2,9 +2,9 @@ var express = require('express');
 var adminRouter = express.Router();
 var mongoose = require('mongoose');
 
-var config = require('../config.js');
-var url = config.database;
-var db = mongoose.createConnection(url);
+// var config = require('../config.json');
+// var url = config.database;
+// var db = mongoose.createConnection(url);
 
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');

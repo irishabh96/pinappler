@@ -2,14 +2,28 @@ var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
-var mongoose    = require('mongoose');
 var path 		= require('path');
 var hbs 		= require('hbs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
 
-//public directory
+/* EVN setup */
+var ENV;
+if (process.env.NODE_ENV) {
+  ENV = process.env.NODE_ENV
+} else {
+  ENV = 'development';
+}
+
+
+/*mongo connect*/
+var mongo = require('./config.json');
+var mongoose  = require('mongoose');
+var mongoUri = process.env.MONGOHQ_URL || mongo[ENV].uri;
+db = mongoose.connect(mongoUri);
+
+/*statis directories*/
 
 app.set('views', path.join(__dirname, 'views')); // register view
 app.set('view engine','hbs'); //hbs
@@ -23,8 +37,8 @@ app.get('/', function(req, res){
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({secret: 'hello'}));
-require('./config/passport_config.js') (app);
+app.use(morgan('dev')); // status of routes and files in console
+
 //routes
 var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
@@ -36,17 +50,6 @@ app.use('/admin/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/edit', editRoutes);
-// var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-// var config = require('./config/config.js'); // get our config file
-// var User   = require('./models/user');
-
-//port and database
-// var port = process.env.PORT || 3000 ;
-// mongoose.connect(config.database);
 
 
-
-// app.listen(port ,function(){
-// 	console.log('listening to port specified ' + port)
-// });
 module.exports = app;

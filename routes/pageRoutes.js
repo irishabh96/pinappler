@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var pageRouter = express.Router();
 var bodyParser = require('body-parser');
 
-var config = require('../config.js');
-var url = config.database;
-var db = mongoose.createConnection(url);
+// var config = require('../config.json');
+// var url = config.database;
+// var db = mongoose.createConnection(url);
 var page = require('../models/page_insert');
 
 pageRouter.route('/')
