@@ -2,9 +2,7 @@ var express = require('express');
 var editRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-// var config = require('../config.json');
-// var url = config.database;
-// var db = mongoose.createConnection(url);
+
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
 
@@ -64,7 +62,7 @@ editRouter.route('/:slug')
                 		res.status(500).send('mongo err ' + err);
                 	}
                 	else{
-                		res.json(productItem)
+                		alert("Hello world!");
                 	}
                 })
                 
@@ -98,4 +96,38 @@ editRouter.route('/:slug')
 		})
 	})
 
+editRouter.route('/:slug/delete')
+	.get(function(req, res){
+		var query = {
+			'slug': req.params.slug
+		}
+		product.findOne(query, function(err, productDelete){
+			if(productDelete){
+				product.remove(query, function(err){
+					if(err){
+						console.log('Mongodb Err product : ' + err)
+					}
+					else{
+						res.redirect('/admin/products');
+					}
+				})
+			}
+
+			if(!productDelete){
+				page.findOne(query, function(err, pageDelete){
+					page.remove(query, function(err){
+						if(err){
+							console.log('Mongodb Err page: '+ err)
+						}
+						else{
+							res.redirect('/admin/pages')
+						}
+					})
+				})
+			}
+			else{
+				console.log('No item found to delete')
+			}
+		})
+	})
 module.exports = editRouter

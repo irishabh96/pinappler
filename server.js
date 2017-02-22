@@ -7,8 +7,8 @@ var hbs 		= require('hbs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
-
 /* EVN setup */
+
 var ENV;
 if (process.env.NODE_ENV) {
   ENV = process.env.NODE_ENV
@@ -16,6 +16,7 @@ if (process.env.NODE_ENV) {
   ENV = 'development';
 }
 
+console.log('The current NODE_ENV is : ' +ENV)
 
 /*mongo connect*/
 var mongo = require('./config.json');

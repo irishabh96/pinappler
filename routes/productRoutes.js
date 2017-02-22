@@ -10,9 +10,6 @@ var imagekit = new ImageKit({
    "apiSecret"  : "GtOezbPqZRDtCj4mQDL9f25hxWc=", 
 });
 
-// var config = require('../config.json');
-// var url = config.database;
-// var db = mongoose.connect(url);
 var product = require('../models/products_insert');
 
 var upload = multer().single('image');
