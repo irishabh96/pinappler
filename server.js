@@ -4,6 +4,7 @@ var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var path 		= require('path');
 var hbs 		= require('hbs');
+var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
@@ -39,18 +40,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('dev')); // status of routes and files in console
-
+app.use(methodOverride());
 //routes
 var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
 var productRoutes = require('./routes/productRoutes'); //product route
 var pageRoutes = require('./routes/pageRoutes');
 var editRoutes = require('./routes/editRoutes');
+var webpages = require('./routes/webpages');
 app.use('/admin/pages', pageRoutes);	// base url = admin/pages
 app.use('/admin/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/edit', editRoutes);
-
-
+app.use('/admin/webpages', webpages);
 module.exports = app;
+// router.put('/company/:id', Company.update),

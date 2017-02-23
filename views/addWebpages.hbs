@@ -1,0 +1,28 @@
+{{>header}}
+<div class="container-fluid">
+	
+	<div class="col-md-4">
+		<div>
+			<h1>Add a Website</h1>
+				
+			<form action="/admin/webpages" method="POST">
+				<div class="form-group">
+					<label for="websiteName">Website Name</label>
+	         		<input type="text" class = "form-control" name="websiteName">
+        		</div>
+        		<div class="form-group">
+        			<label for="websiteUrl">Url</label>
+					<input type="text" class ="form-control" name="websiteUrl">
+        		</div>
+        		<div class="form-group">
+        			<label for="scrappingMethod">Scrapping Method</label>
+					<input type="text" class ="form-control" name="scrappingMethod">
+        		</div>
+        			<input class="btn btn-default" type="submit" name="submit">
+        		</div>
+			</form>
+		</div>
+	</div> <!-- row -->
+	
+</div> <!-- container 
+{{>footer}}

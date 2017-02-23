@@ -28,5 +28,10 @@ adminRouter.route('/pages/add')
 			});
 		});
 
-
+adminRouter.route('/webpages/add')
+		.get(function(req, res){
+			res.render('addwebpages',{
+				title: 'Add page'
+			});
+		});
 module.exports = adminRouter;

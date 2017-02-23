@@ -29,7 +29,7 @@ editRouter.route('/:slug')
 						
 						res.render('pageTableContentEdit', {
 							title: 'Pages',
-					    	data: pageItem
+					    	pageData: pageItem
 						});
 					}
 					else{
@@ -43,7 +43,7 @@ editRouter.route('/:slug')
 			}
 		})
 	})
-
+// update
 	.post(function(req, res){
 		var query = {
 				'slug': req.params.slug
@@ -62,7 +62,7 @@ editRouter.route('/:slug')
                 		res.status(500).send('mongo err ' + err);
                 	}
                 	else{
-                		alert("Hello world!");
+                		res.redirect('/admin/products')
                 	}
                 })
                 
@@ -95,7 +95,7 @@ editRouter.route('/:slug')
 			}
 		})
 	})
-
+// delete
 editRouter.route('/:slug/delete')
 	.get(function(req, res){
 		var query = {
