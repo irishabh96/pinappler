@@ -16,13 +16,29 @@
           </div>
           <div class="form-group">
             <label for="category" >Category</label>
-            <select name="category" class="form-control">
-              <option value="0">Select Category</option>
+            <select id="category" name="category" class="form-control">
               <option name="Mobile" value="Mobile">Mobile</option>
               <option name="Tablet" value="Tablet">Tablet</option>
               <option name="Watch" value="Watch">Watch</option>
               <option name="Laptop" value="Laptop">Laptop</option>
             </select>
+          </div>
+          <div class="form-group">
+            <!--data is from sltconfig-->
+           
+            <label for="varient" >Varient</label>
+            <select id="varient" name="varient" class="form-control">
+              {{#each selectfields}} 
+                <option name="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="websites">Websites</label><br>
+            {{#each checkfields}}
+            <input type="checkbox" name="{{this}}">{{this}}
+            {{/each}}
           </div>
           <div class="form-group">
             <label for="discription" >Discription</label>
@@ -33,7 +49,7 @@
             <input type="text" class ="form-control" name="slug"  placeholder="Slug should be unique">
           </div>
           <div class="form-group">
-            <label for="image of product" ></label>
+            <label for="image of product" >Upload image</label>
             <input type="file" name="image" /><br>
             <input class="btn btn-default" type="submit" name="submit">
           </div>

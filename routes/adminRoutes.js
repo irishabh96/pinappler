@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
+var sltConfig = require('./sltConfig').varients;
+var chkConfig = require('./sltConfig').checkbox;
+console.log(sltConfig + chkConfig)
 
 adminRouter.route('/')
 		.get (function(req, res){
@@ -17,14 +20,17 @@ adminRouter.route('/')
 adminRouter.route('/products/add')
 		.get(function(req,res){
 			res.render('addProduct',{
-				title: 'Welcome'
+				title: 'Welcome',
+				selectfields: sltConfig,
+				checkfields: chkConfig
 			});
 		});
 
 adminRouter.route('/pages/add')
 		.get(function(req, res){
 			res.render('addPage',{
-				title: 'Add page'
+				title: 'Add page',
+
 			});
 		});
 

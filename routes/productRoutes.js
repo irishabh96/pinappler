@@ -9,6 +9,8 @@ var imagekit = new ImageKit({
    "apiKey" 	: "b4cK89DP0xXkRJJiaEp5OIa+wWk=",       
    "apiSecret"  : "GtOezbPqZRDtCj4mQDL9f25hxWc=", 
 });
+// var sltConfig = JSON.stringify(require('./sltConfig').options)
+// console.log(sltConfig)
 
 var product = require('../models/products_insert');
 

@@ -4,12 +4,11 @@ var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var path 		= require('path');
 var hbs 		= require('hbs');
-var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
-/* EVN setup */
 
+/* EVN setup */
 var ENV;
 if (process.env.NODE_ENV) {
   ENV = process.env.NODE_ENV
@@ -17,7 +16,7 @@ if (process.env.NODE_ENV) {
   ENV = 'development';
 }
 
-console.log('The current NODE_ENV is : ' +ENV)
+console.log('The current NODE_ENV is : ' +ENV);
 
 /*mongo connect*/
 var mongo = require('./config.json');
@@ -40,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('dev')); // status of routes and files in console
-app.use(methodOverride());
+
 //routes
 var adminRoutes = require('./routes/adminRoutes');
 var authRoutes = require('./routes/authRoutes');
