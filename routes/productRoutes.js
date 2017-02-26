@@ -35,10 +35,8 @@ productRouter.route('/')
         // var uploadPromise; var url;
         // uploadPromise = imagekit.upload(req.file.buffer.toString('base64'), {
         //     "filename" : req.file.originalname,
-        //     "folder" : "/images"
-        
-        // });
-       
+        //     "folder" : "/images"        
+        // });       
         // //handle upload success and failure of image
         // uploadPromise.then(function(result) {
         // 	if(err){console.log(err)}
@@ -46,7 +44,6 @@ productRouter.route('/')
         //     console.log(imagekit_url.url);
         //     img_url = url.url;
         //     return(img_url)
-
         //})
         var slug = req.body.slug;
         var query = {

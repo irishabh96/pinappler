@@ -21,16 +21,16 @@ adminRouter.route('/products/add')
 		.get(function(req,res){
 
 			var productVarients = config.productForm.productVarients;
-			var productColors = config.productForm.productColors;
-			var websitesList = websites.websitesList;			
-
-			res.render('addProduct',{
-				title: 'Welcome',
-				productVarients: productVarients,
-				productColors: productColors,
-				websites: websitesList
-				//checkfields: chkConfig	
+			var productColors = config.productForm.productColors;			
+			websites.getWebsiteList(function(websitesList){				
+				res.render('addProduct',{
+					title: 'Welcome',
+					productVarients: productVarients,
+					productColors: productColors,
+					websites: websitesList					
+				});
 			});
+					
 
 		});
 

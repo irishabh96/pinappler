@@ -9,15 +9,24 @@ var model = require('../models/webpage');
 // here "webpage" is model name while everywhere else is website
 
 // Init function or looking for a better way to do this. not sure
-(function(){
+// (function(){
+// 	model.find({}, {websiteName:1, _id:0}, function(err, websites){
+// 			if(err){
+// 				console.log('MongoErr: '+ err);
+// 			}
+// 			//console.log(websites);
+// 			webpageRoute.websitesList = websites;
+// 	});
+// })();
+
+webpageRoute.getWebsiteList = function(cb){
 	model.find({}, {websiteName:1, _id:0}, function(err, websites){
 			if(err){
 				console.log('MongoErr: '+ err);
 			}
-			//console.log(websites);
-			webpageRoute.websitesList = websites;
+			cb(websites);
 	});
-})();
+};
 
 webpageRoute.route('/')
 	.post(function(req, res){
