@@ -7,7 +7,6 @@ var hbs 		= require('hbs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
-
 /* EVN setup */
 var ENV;
 if (process.env.NODE_ENV) {

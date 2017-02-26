@@ -59,26 +59,94 @@ productRouter.route('/')
 		    }
 			    if (!productItem) {
 			        console.log("No item found, creating product item");
+			    	if(req.body.links == 'Paytm'){
+			        	product.create(
+				            {
+								website:{
+			                		paytm:{
+			                			Url: req.body.Url
+			                		}
+			                	},
+			                	product_name: req.body.product_name,
+				                brand: req.body.brand,
+				                category: req.body.category,
+				                varient: req.body.varient,
+				                discription: req.body.discription,
+				                slug: req.body.slug,
+				                url: img_url
 
-			        product.create(
-			            {
-			                product_name: req.body.product_name,
-			                brand: req.body.brand,
-			                category: req.body.category,
-			                discription: req.body.discription,
-			                slug: req.body.slug,
-			                url: img_url
+					        }, function(err, createdItem) {
+				                if (err) {
+				                    console.log("MongoDB Error: " + err);
+				                    return null; 
+				                }
+				                else {
+				                	res.redirect('/admin/products')
+				                }
+			            	  }
+			        	);
+				    }
+				
+			        else if(req.body.links == 'Amazon'){
+			        	product.create(
+				            {
+
+			                	website:{
+			                		amazon:{
+			                			amazonUrl: req.body.Url
+			                		}
+			                	},
+			                	product_name: req.body.product_name,
+				                brand: req.body.brand,
+				                category: req.body.category,
+				                varient: req.body.varient,
+				                discription: req.body.discription,
+				                slug: req.body.slug,
+				                url: img_url
+
+					            }, function(err, createdItem) {
+				                if (err) {
+				                    console.log("MongoDB Error: " + err);
+				                    return null; 
+				                }
+				                else {
+				                	res.redirect('/admin/products')
+				                }
+			            	}
+			        	);
+				    }
+				    else{
+			        	product.create(
+				            {
+
+			                	website:{
+			                		flipkart:{
+			                			Url: req.body.Url
+			                		}
+			                	},
+			                	product_name: req.body.product_name,
+				                brand: req.body.brand,
+				                category: req.body.category,
+				                varient: req.body.varient,
+				                discription: req.body.discription,
+				                slug: req.body.slug,
+				                url: img_url
+
+					            }, function(err, createdItem) {
+				                if (err) {
+				                    console.log("MongoDB Error: " + err);
+				                    return null; 
+				                }
+				                else {
+				                	res.redirect('/admin/products')
+				                	// console.log('hello')
+				                }
+			            	}
+			        	);
+				    }
 			                
-			            }, function(err, createdItem) {
-			                if (err) {
-			                    console.log("MongoDB Error: " + err);
-			                    return null; 
-			                }
-			                else {
-			                	res.redirect('/admin/products')
-			                }
-			            }
-			        );
+			                
+			            
 			    }
     		else {
         		console.log("Enter a unique slug .. Found one product item " );

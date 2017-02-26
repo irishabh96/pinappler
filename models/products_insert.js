@@ -15,6 +15,26 @@ var add_product = new Schema({
 	category: {
 		type: 'String'
 	},
+	varient:{
+		type: 'String'
+	},
+	website: {
+		paytm:{
+			Url: {
+				type: 'String',
+			}
+		},
+		flipkart:{
+			Url: {
+				type: 'String',
+			}
+		},
+		amazon:{
+			Url: {
+				type: 'String'
+			}
+		}
+	},
 	discription: {
 		type: 'String'
 	},
