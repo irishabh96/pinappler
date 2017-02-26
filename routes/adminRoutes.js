@@ -1,12 +1,12 @@
 var express = require('express');
 var adminRouter = express.Router();
 var mongoose = require('mongoose');
-
 var product = require('../models/products_insert');
 var page = require('../models/page_insert');
-var sltConfig = require('./sltConfig').varients;
-var chkConfig = require('./sltConfig').checkbox;
-console.log(sltConfig + chkConfig)
+var config = require('../config');
+var websites = require('./webpages');
+
+//console.log(sltConfig + chkConfig)
 
 adminRouter.route('/')
 		.get (function(req, res){
@@ -19,18 +19,25 @@ adminRouter.route('/')
 
 adminRouter.route('/products/add')
 		.get(function(req,res){
+
+			var productVarients = config.productForm.productVarients;
+			var productColors = config.productForm.productColors;
+			var websitesList = websites.websitesList;			
+
 			res.render('addProduct',{
 				title: 'Welcome',
-				selectfields: sltConfig,
-				checkfields: chkConfig
+				productVarients: productVarients,
+				productColors: productColors,
+				websites: websitesList
+				//checkfields: chkConfig	
 			});
+
 		});
 
 adminRouter.route('/pages/add')
 		.get(function(req, res){
 			res.render('addPage',{
-				title: 'Add page',
-
+				title: 'Add page'
 			});
 		});
 

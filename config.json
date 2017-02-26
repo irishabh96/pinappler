@@ -22,5 +22,21 @@
         }
       }
     }
+  },
+  "productForm":{
+    "productVarients": [
+      "16GB",
+      "32GB",
+      "64GB",
+      "128GB",
+      "256GB"
+    ],
+    "productColors": [
+      "Gold",
+      "Rose Gold",
+      "Space Grey",
+      "Jet Black",
+      "Silver"
+    ]
   }
 }

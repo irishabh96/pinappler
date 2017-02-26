@@ -5,10 +5,11 @@
   <div>
     <div class="col-md-4">
         <h1>Add a Product</h1>
-        <form action="/admin/products" method="post" enctype="multipart/form-data">
+        <hr>
+        <form action="/admin/products" method="post">
           <div class="form-group">
             <label for="product_name">Product Name</label>
-            <input type="text" placeholder="Product Name" class = "form-control" name="product_name"><br>
+            <input type="text" placeholder="Product Name" class = "form-control" name="product_name">
           </div>
           <div class="form-group">
             <label for="brand" >Product Brand</label>
@@ -23,29 +24,40 @@
               <option name="Laptop" value="Laptop">Laptop</option>
             </select>
           </div>
-          <div class="form-group">
-            <!--data is from sltconfig-->
-           
+
+          <div class="form-group">                       
             <label for="varient" >Varient</label>
             <select id="varient" name="varient" class="form-control">
-              {{#each selectfields}} 
+              <option value="">Please Select</option>
+              {{#each productVarients}} 
                 <option name="{{this}}">{{this}}</option>
               {{/each}}
             </select>
           </div>
 
-          <div class="form-group" >
-            <label for="websites">Websites</label><br>
-            <select name="links" class="form-control">
-              {{#each checkfields}}
-              <option name = "{{this}}">{{this}}</option>
+          <div class="form-group">                       
+            <label for="color" >Color</label>
+            <select id="color" name="color" class="form-control">
+              <option value="">Please Select</option>
+              {{#each productColors}} 
+                <option name="{{this}}">{{this}}</option>
               {{/each}}
             </select>
           </div>
-          <div class="form-group">
-            <label for="Url" >url</label>
-            <input type="text" class ="form-control" name="Url"  placeholder="Slug should be unique">
-          </div>
+
+          <hr>
+          <div class="form-group">          
+            <label for="websites">Websites</label>
+              {{#each websites}}
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <input type="checkbox" name="websites" value="{{this.websiteName}}"> {{this.websiteName}}
+                  </span>
+                  <input type="text" class ="form-control" name="{{this.websiteName}}Url"  placeholder="{{this.websiteName}} url">
+                </div>                
+                <hr>
+              {{/each}}              
+          </div>          
           <div class="form-group">
             <label for="discription" >Discription</label>
             <textarea name="discription" placeholder="Product Discription Needed" class="form-control"></textarea>

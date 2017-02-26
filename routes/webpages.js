@@ -1,7 +1,23 @@
 var express = require('express')
 var mongoose = require('mongoose');
 var webpageRoute = express.Router();
+
+// use "Website" instead of Model -- same goes for file name, (while for **Models** --- try using First capital + camel case in model names)
 var model = require('../models/webpage');
+
+// take care of naming convention its very important when codebase becomes large
+// here "webpage" is model name while everywhere else is website
+
+// Init function or looking for a better way to do this. not sure
+(function(){
+	model.find({}, {websiteName:1, _id:0}, function(err, websites){
+			if(err){
+				console.log('MongoErr: '+ err);
+			}
+			//console.log(websites);
+			webpageRoute.websitesList = websites;
+	});
+})();
 
 webpageRoute.route('/')
 	.post(function(req, res){
@@ -128,6 +144,6 @@ webpageRoute.route('/edit/:websiteUrl')
 				console.log('No such EDIT URL')
 			}
 		})
-	})
+	});	
 
 module.exports = webpageRoute;
