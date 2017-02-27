@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var pageRouter = express.Router();
 var bodyParser = require('body-parser');
 
-var page = require('../models/page_insert');
+var page = require('../../../models/Pages');
 
 pageRouter.route('/')
 		.post(function(req, res){
@@ -22,8 +22,8 @@ pageRouter.route('/')
 					page.create(
 						{
 
-							page_name : req.body.page_name,
-							page_title : req.body.page_title,
+							name : req.body.name,
+							title : req.body.title,
 							slug: req.body.slug 
 
 						}, function(err , createditem){
@@ -53,13 +53,21 @@ pageRouter.route('/')
 					res.status(500).send(err);
 				}
 				else {
-					res.render('pageTableContent',{
+					res.render('pages/listPages',{
 						title: 'Pages',
 						thead: ['Name', 'Title', 'Slug'],
-						page_data: pages
+						data: pages
 					});
 				}
 			});
 		});
+
+pageRouter.route('/add')
+		.get(function(req, res){
+			res.render('pages/addPage',{
+				title: 'Add page'
+			});
+		});
+
 		
 module.exports = pageRouter

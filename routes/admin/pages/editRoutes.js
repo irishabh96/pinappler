@@ -3,8 +3,8 @@ var editRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var product = require('../models/products_insert');
-var page = require('../models/page_insert');
+var product = require('../../../models/Products');
+var page = require('../../../models/Pages');
 
 
 editRouter.route('/:slug')
@@ -15,7 +15,7 @@ editRouter.route('/:slug')
 			}
 		product.findOne(query, function(err, productItem){
 			if(productItem){
-				res.render('productTableContentEdit', {
+				res.render('products/editProduct', {
 					title: 'Product',
 			    	data: productItem
 				});
@@ -27,7 +27,7 @@ editRouter.route('/:slug')
 				page.findOne(query, function(err, pageItem){
 					if(pageItem) {
 						
-						res.render('pageTableContentEdit', {
+						res.render('pages/editPage', {
 							title: 'Pages',
 					    	pageData: pageItem
 						});
@@ -51,10 +51,10 @@ editRouter.route('/:slug')
 		product.findOne(query, function(err, productItem){
 			if(productItem){
 
-				productItem.product_name = req.body.product_name,
+				productItem.name = req.body.name,
                 productItem.brand = req.body.brand,
                 productItem.category = req.body.category,
-                productItem.discription = req.body.discription,
+                productItem.description = req.body.description,
                 productItem.slug = req.body.slug
 
                 productItem.save(function(err){
@@ -71,8 +71,8 @@ editRouter.route('/:slug')
 				page.findOne(query, function(err, pageItem){
 					if (pageItem) {
 						
-						pageItem.page_name = req.body.page_name,
-						pageItem.page_title = req.body.page_title,
+						pageItem.name = req.body.name,
+						pageItem.title = req.body.title,
 						pageItem.slug = req.body.slug
 
 						pageItem.save(function(err){

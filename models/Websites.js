@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var webpage = new Schema({
+var addWebsiteSchema = new Schema({
 	websiteName: {
 		type: 'String'
 	},
@@ -14,4 +14,9 @@ var webpage = new Schema({
 
 });
 
-module.exports = mongoose.model('webpages', webpage);
+/*
+changes
+*filename changed = Webpages
+*/
+
+module.exports = mongoose.model('Websites', addWebsiteSchema);

@@ -4,6 +4,8 @@ var productRouter = express.Router();
 //var ImageKit = require('imagekit');
 //var multer = require('multer');
 var q = require('q');
+var websites = require('../websites/websites');
+var config = require('../../../config');
 // var imagekit = new ImageKit({
 //    "imagekitId" : "rishabhbhatia",       
 //    "apiKey" 	: "b4cK89DP0xXkRJJiaEp5OIa+wWk=",       
@@ -12,7 +14,7 @@ var q = require('q');
 // var sltConfig = JSON.stringify(require('./sltConfig').options)
 // console.log(sltConfig)
 
-var product = require('../models/products_insert');
+var product = require('../../../models/Products');
 
 //var upload = multer().single('image');
 
@@ -74,11 +76,11 @@ productRouter.route('/')
 			        	product.create(
 				            {
 								websites: websitesData,
-			                	product_name: req.body.product_name,
+			                	name: req.body.name,
 				                brand: req.body.brand,
 				                category: req.body.category,
 				                varient: req.body.varient,
-				                discription: req.body.discription,
+				                description: req.body.description,
 				                slug: req.body.slug,
 				                //url: img_url
 
@@ -122,9 +124,9 @@ productRouter.route('/')
 				res.status(500).send(err);
 			}
 			else {
-				res.render('productTableContent', {
+				res.render('products/listProducts', {
 				title: 'Products',
-		    	thead: ['Name', 'Brand', 'Category', 'Discription', 'Slug'],
+		    	thead: ['Name', 'Brand', 'Category', 'Description', 'Slug'],
 		    	data: products
 
 				});
@@ -132,5 +134,22 @@ productRouter.route('/')
 		});
 
 	});
+
+productRouter.route('/add')
+		.get(function(req,res){
+
+			var productVarients = config.productForm.productVarients;
+			var productColors = config.productForm.productColors;			
+			websites.getWebsiteList(function(websitesList){				
+				res.render('products/addProduct',{
+					title: 'Welcome',
+					productVarients: productVarients,
+					productColors: productColors,
+					websites: websitesList					
+				});
+			});
+					
+
+		});
 
 module.exports = productRouter;

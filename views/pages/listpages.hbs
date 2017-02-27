@@ -12,11 +12,11 @@
         </tr>
       </thead>
       <tbody>
-      	{{#each page_data}}
+      	{{#each data}}
             <tr>
 
-            <td>{{this.page_name}}</td>
-            <td>{{this.page_title}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.title}}</td>
             <td>{{this.slug}}</td>
             <td>
             <a href="/admin/edit/{{this.slug}}"><span class="glyphicon glyphicon-check"></span></a>

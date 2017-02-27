@@ -1,26 +1,12 @@
 var express = require('express')
 var mongoose = require('mongoose');
-var webpageRoute = express.Router();
+var websiteRoute = express.Router();
 
-// use "Website" instead of Model -- same goes for file name, (while for **Models** --- try using First capital + camel case in model names)
-var model = require('../models/webpage');
 
-// take care of naming convention its very important when codebase becomes large
-// here "webpage" is model name while everywhere else is website
+var Websites = require('../../../models/Websites');
 
-// Init function or looking for a better way to do this. not sure
-// (function(){
-// 	model.find({}, {websiteName:1, _id:0}, function(err, websites){
-// 			if(err){
-// 				console.log('MongoErr: '+ err);
-// 			}
-// 			//console.log(websites);
-// 			webpageRoute.websitesList = websites;
-// 	});
-// })();
-
-webpageRoute.getWebsiteList = function(cb){
-	model.find({}, {websiteName:1, _id:0}, function(err, websites){
+websiteRoute.getWebsiteList = function(cb){
+	Websites.find({}, {websiteName:1, _id:0}, function(err, websites){
 			if(err){
 				console.log('MongoErr: '+ err);
 			}
@@ -28,16 +14,16 @@ webpageRoute.getWebsiteList = function(cb){
 	});
 };
 
-webpageRoute.route('/')
+websiteRoute.route('/')
 	.post(function(req, res){
-			model.findOne({websiteUrl: req.body.websiteUrl}, function(err, item){
+			Websites.findOne({websiteUrl: req.body.websiteUrl}, function(err, item){
 				if (err){
 					console.log('Mongodb err: ' + err)
 				}
 				if(!item){
 					console.log('No such model found , creating model..')
 
-					model.create(
+					Websites.create(
 						{
 
 							websiteName : req.body.websiteName,
@@ -51,7 +37,7 @@ webpageRoute.route('/')
 							else{
 								console.log('Created Successfully')
 								// res.status(200).json(createditem)
-								res.redirect('/admin/webpages')
+								res.redirect('/admin/websites')
 							}
 
 						}
@@ -66,13 +52,13 @@ webpageRoute.route('/')
 		
 		}) // post end here
 	.get(function(req, res){
-		model.find({}, function(err, result){
+		Websites.find({}, function(err, result){
 			if(err){
 				console.log(err)
 			}
 			else{
-				res.render('webpageContent', {
-					title: 'Webpages',
+				res.render('websites/listwebsites', {
+					title: 'Websites',
 					thead: ['Website Name', 'Website Url', 'Scrapping Method'],
 					data: result
 				})
@@ -80,22 +66,19 @@ webpageRoute.route('/')
 		});
 	});
 
-webpageRoute.route('/delete/:websiteUrl')
+websiteRoute.route('/delete/:websiteUrl')
 	.get(function(req, res){
 		var query = {
 				'websiteUrl': req.params.websiteUrl
 			}
-		model.findOne(query, function(err, pageDelete){
-			if(err){
-				console.log('MongoErr: '+ err)
-			}
+		Websites.findOne(query, function(err, pageDelete){
 			if(pageDelete){
-				model.remove(query, function(err){
+				Websites.remove(query, function(err){
 					if(err){
 						console.log('Mongodb Err product : ' + err)
 					}
 					else{
-						res.redirect('/admin/webpages');
+						res.redirect('/admin/websites');
 					}
 				})
 			}
@@ -106,17 +89,17 @@ webpageRoute.route('/delete/:websiteUrl')
 		})
 	});
 
-webpageRoute.route('/edit/:websiteUrl')
+websiteRoute.route('/edit/:websiteUrl')
 	
 	.get(function(req, res){
 			var query = {
 				'websiteUrl': req.params.websiteUrl
 			}
-		model.findOne(query, function(err, editItem){
-			if(editItem){
-				res.render('webpageContentEdit', {
-					title: 'Webpages',
-			    	data: editItem
+		Websites.findOne(query, function(err, result){
+			if(result){
+				res.render('websites/editWebsites', {
+					title: 'Website',
+			    	data: result
 				});
 			}
 			else{ 
@@ -129,7 +112,7 @@ webpageRoute.route('/edit/:websiteUrl')
 		var query = {
 				'slug': req.params.slug
 			}
-		model.findOne(query, function(err, editedItem){
+		Websites.findOne(query, function(err, editedItem){
 			if(editedItem){
 
 				editedItem.websiteName = req.body.websiteName,
@@ -141,18 +124,25 @@ webpageRoute.route('/edit/:websiteUrl')
                 		res.status(500).send('mongo err ' + err);
                 	}
                 	else{
-                		res.redirect('/admin/webpages')
+                		res.redirect('/admin/websites')
                 	}
                 })
                 
 			}
-			if(err){
-				console.log(err)
+			if(!editedItem){
+				console.log('Not Found')
 			}
 			else{ 
-				console.log('No such EDIT URL')
+				console.log('MongoErr: '+ err)
 			}
 		})
 	});	
 
-module.exports = webpageRoute;
+websiteRoute.route('/add')
+		.get(function(req, res){
+			res.render('websites/addWebsites',{
+				title: 'Add page'
+			});
+		});
+
+module.exports = websiteRoute;

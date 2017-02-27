@@ -9,7 +9,7 @@ var websitesListSubSchema = new mongoose.Schema({
 
 var addProductSchema = new Schema({
 
-	product_name: {
+	name: {
 		type: 'String',
 		 default: '', 
 		 trim: true
@@ -24,6 +24,15 @@ var addProductSchema = new Schema({
 		type: 'String'
 	},
 	websites: [websitesListSubSchema],	
+
+/* changes 
+* product_name = name
+*file name changed products_insert = Products
+discription = description
+*/
+
+
+
 
 		//****************************
 		//you can use this
@@ -50,13 +59,14 @@ var addProductSchema = new Schema({
 		// 	}
 		// }
 
-	discription: {
+	description: {
 		type: 'String'
 	},
 	slug: {
 		type: 'String',
 		 default: '', 
-		 trim: true
+		 trim: true,
+		 required: true
 	},
 	url: {
 		type: 'String'
@@ -64,4 +74,4 @@ var addProductSchema = new Schema({
 
 });
 // add_product.plugin(URLSlugs('product_name', {field: 'myslug'}));
-module.exports = mongoose.model('products', addProductSchema);
+module.exports = mongoose.model('Products', addProductSchema);

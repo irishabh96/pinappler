@@ -1,22 +1,22 @@
 {{>header}}
-
 <div class="container-fluid">
 	
 	<div class="col-md-4">
 		<div>
-			<h1>Add a Page</h1>
-			<form action="/admin/pages" method="post">
+			<h1>Edit {{pageData.slug}}</h1>
+			<hr>
+			<form action="/admin/edit/{{pageData.slug}}" method="POST">
 				<div class="form-group">
 					<label for="page name">Page Name</label>
-	         		<input type="text" placeholder="Page Name" class = "form-control" name="page_name"><br>
+	         		<input type="text" class = "form-control" name="name" value="{{pageData.name}}" ><br>
         		</div>
         		<div class="form-group">
         			<label for="page title">Page title</label>
-					<input type="text" class ="form-control" placeholder="Page Title" name="page_title">
+					<input type="text" class ="form-control" name="title" value="{{pageData.title}}">
         		</div>
         		<div class="form-group">
         			<label for="Slug">Slug</label>
-					<input type="text" class ="form-control" placeholder="Slug" name="slug">
+					<input type="text" class ="form-control" placeholder="Slug" name="slug" value="{{pageData.slug}}">
         		</div>
         		<div>
         			<input class="btn btn-default" type="submit" name="submit">
@@ -26,6 +26,4 @@
 	</div> <!-- row -->
 	
 </div> <!-- container -->
-
-
 {{>footer}}

@@ -40,17 +40,17 @@ app.use(cookieParser());
 app.use(morgan('dev')); // status of routes and files in console
 
 //routes
-var adminRoutes = require('./routes/adminRoutes');
-var authRoutes = require('./routes/authRoutes');
-var productRoutes = require('./routes/productRoutes'); //product route
-var pageRoutes = require('./routes/pageRoutes');
-var editRoutes = require('./routes/editRoutes');
-var webpages = require('./routes/webpages');
+var adminRoutes = require('./routes/admin/index');
+var authRoutes = require('./routes/admin/auth/authRoutes');
+var productRoutes = require('./routes/admin/products/productRoutes'); //product route
+var pageRoutes = require('./routes/admin/pages/pageRoutes');
+var editRoutes = require('./routes/admin/pages/editRoutes');
+var websites = require('./routes/admin/websites/websites');
 app.use('/admin/pages', pageRoutes);	// base url = admin/pages
 app.use('/admin/products', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin/edit', editRoutes);
-app.use('/admin/webpages', webpages);
+app.use('/admin/websites', websites);
 module.exports = app;
 // router.put('/company/:id', Company.update),
