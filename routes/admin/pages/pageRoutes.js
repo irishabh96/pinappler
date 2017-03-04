@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var pageRouter = express.Router();
 var bodyParser = require('body-parser');
 
-var page = require('../../../models/Pages');
+var Pages = require('../../../models/Pages');
 
 pageRouter.route('/')
 		.post(function(req, res){
@@ -12,14 +12,14 @@ pageRouter.route('/')
 			var query = {
 				slug: slug
 			};
-			page.findOne(query, function(err, item){
+			Pages.findOne(query, function(err, item){
 				if (err){
 					console.log('Mongodb err: ' + err)
 				}
 				if(!item){
 					console.log('No such Page found , creating page..')
 
-					page.create(
+					Pages.create(
 						{
 
 							name : req.body.name,
@@ -48,7 +48,7 @@ pageRouter.route('/')
 		
 		}) // post end here
 		.get(function(req, res){
-			page.find(function(err, pages){
+			Pages.find(function(err, pages){
 				if(err){
 					res.status(500).send(err);
 				}

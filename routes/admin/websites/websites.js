@@ -110,7 +110,7 @@ websiteRoute.route('/edit/:websiteUrl')
 // update
 	.post(function(req, res){
 		var query = {
-				'slug': req.params.slug
+				'websiteUrl': req.params.websiteUrl
 			}
 		Websites.findOne(query, function(err, editedItem){
 			if(editedItem){

@@ -4,7 +4,7 @@ var productRouter = express.Router();
 //var ImageKit = require('imagekit');
 //var multer = require('multer');
 var q = require('q');
-var websites = require('../websites/websites');
+var Websites = require('../websites/websites');
 var config = require('../../../config');
 // var imagekit = new ImageKit({
 //    "imagekitId" : "rishabhbhatia",       
@@ -14,7 +14,7 @@ var config = require('../../../config');
 // var sltConfig = JSON.stringify(require('./sltConfig').options)
 // console.log(sltConfig)
 
-var product = require('../../../models/Products');
+var Products = require('../../../models/Products');
 
 //var upload = multer().single('image');
 
@@ -52,7 +52,7 @@ productRouter.route('/')
 			'slug': slug
 		};
 
-        product.findOne(query, function(err, productItem) {
+        Products.findOne(query, function(err, productItem) {
 		    if (err) {
 		        console.log("MongoDB Error: " + err);
 		        return false;
@@ -63,17 +63,32 @@ productRouter.route('/')
 			        	// Important block of code study this one, try using debugger, let me know if any issues in understanding
 			        	var websites = req.body.websites;
 			        	var websitesData = [];
-			        	for (var i = websites.length - 1; i >= 0; i--) {
-			        		websitesData.push({
-			        							name : websites[i],
-			                					url: req.body[websites[i]+'Url']
-			                				});
-			            }
+			        	// for (var i = websites.length - 1; i >= 0; i--) {
+			        	// 	websitesData.push({
+			        	// 						name : websites[i],
+			         //        					url: req.body[websites[i]+'Url']
+			         //        				});
+			         //    }
+
+			         if(Array.isArray(websites)){
+				        	for (var i = websites.length - 1; i >= 0; i--) {
+				        		websitesData.push({
+				        							name : websites[i],
+				                					url: req.body[websites[i]+'Url']
+				                				});
+				            }
+			        	}
+			      		else{
+			        		websitesData = { 
+			        							name : websites, 
+			        							url: req.body[websites+'Url']
+			        						};
+			        	}
 			            console.log(websitesData);
 			        	///////////////////////////////////////////////////
 
 			    	
-			        	product.create(
+			        	Products.create(
 				            {
 								websites: websitesData,
 			                	name: req.body.name,
@@ -119,7 +134,7 @@ productRouter.route('/')
 						* and will .get data from db
 						*/
 
-		product.find(query, function(err, products){
+		Products.find(query, function(err, products){
 			if(err){
 				res.status(500).send(err);
 			}
@@ -140,7 +155,7 @@ productRouter.route('/add')
 
 			var productVarients = config.productForm.productVarients;
 			var productColors = config.productForm.productColors;			
-			websites.getWebsiteList(function(websitesList){				
+			Websites.getWebsiteList(function(websitesList){				
 				res.render('products/addProduct',{
 					title: 'Welcome',
 					productVarients: productVarients,

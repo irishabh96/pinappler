@@ -19,4 +19,4 @@ changes
 *filename changed = Webpages
 */
 
-module.exports = mongoose.model('Websites', addWebsiteSchema);
+module.exports = mongoose.model('websites', addWebsiteSchema);

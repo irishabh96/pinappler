@@ -23,42 +23,8 @@ var addProductSchema = new Schema({
 	varient:{
 		type: 'String'
 	},
-	websites: [websitesListSubSchema],	
-
-/* changes 
-* product_name = name
-*file name changed products_insert = Products
-discription = description
-*/
-
-
-
-
-		//****************************
-		//you can use this
-		//type : Array , "default" : []
-		//or create a sub schema		
-
-		// kya hai ye bc ... 
-		// docs dekh lia kar
-		// http://mongoosejs.com/docs/2.7.x/docs/model-definition.html
-		// jab bhi code mein paytm likha toh samjh jaa kuch gadbad hai
-		// paytm:{
-		// 	Url: {
-		// 		type: 'String',
-		// 	}
-		// },
-		// flipkart:{
-		// 	Url: {
-		// 		type: 'String',
-		// 	}
-		// },
-		// amazon:{
-		// 	Url: {
-		// 		type: 'String'
-		// 	}
-		// }
-
+	websites: [websitesListSubSchema],
+	
 	description: {
 		type: 'String'
 	},
@@ -73,5 +39,5 @@ discription = description
 	}
 
 });
-// add_product.plugin(URLSlugs('product_name', {field: 'myslug'}));
-module.exports = mongoose.model('Products', addProductSchema);
+
+module.exports = mongoose.model('products', addProductSchema);

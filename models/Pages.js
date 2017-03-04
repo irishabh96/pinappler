@@ -29,4 +29,4 @@ var addPageSchema = new Schema({
 */
 // add_page.plugin(URLSlugs('page_name page_title', {field: 'myslug'}));
 
-module.exports = mongoose.model('Pages', addPageSchema);
+module.exports = mongoose.model('pages', addPageSchema);

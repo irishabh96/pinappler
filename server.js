@@ -7,6 +7,7 @@ var hbs 		= require('hbs');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
+var paytm = require('./routes/scrape/paytm');
 /* EVN setup */
 var ENV;
 if (process.env.NODE_ENV) {

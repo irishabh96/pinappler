@@ -1,22 +1,60 @@
-var casper = require("casper").create();
-var number = /\d+/g;
+var Xray = require('x-ray');
+var x = Xray();
+var mongooose = require('mongoose');
+var product = require('../../models/Products');
+var price = require('../../models/Price');
+var express = require('express');
 
-//paytm iphone 6
+var regex = /([A-Z])|([a-z])|(s)\w+/g;
 
-urls = [
-	'https://paytm.com/shop/p/apple-iphone-6-CMPLXAPPLE_IPHONE6_16GB_SPACEGREY',
-	'https://paytm.com/shop/p/apple-iphone-6-16-gb-silver-MOBAPPLE-IPHONESTRI2736844A5C3DE5?src=search-grid&tracker=organic%7C%7Ciphone%206%7Cgrid%7CSearch%7C%7C4%7Creal_time_scoring_1'
-];
+var currentDate = new Date();
+var priceUpdatedAt = currentDate.toLocaleDateString();;
 
-casper.start().eachThen(urls, function(response){
-var data = this.thenOpen(response.data, function(){
-		this.echo(this.fetchText("#site-wrapper > div.view-animate-container > div > span > div > span > div.big-wrapper-pro > div:nth-child(1) > div.img-description > div.buy-bar > button:nth-child(1) > span:nth-child(1) > span").match(number));
-	});							
+function myTrim(x) {
+    return x.replace(/([A-Z])|([a-z])|(s)\w+/g,'');
+}
+var currentprice;
+
+product.find({"websites": { $elemMatch: {name: 'amazon'} } }, {websites:1, _id:0}, function(err, result) {
+// 	// console.log(result)
+	for (var i = result.length - 1; i >= 0; i--) {
+		// console.log(result[i])
+		var websites = result.websites
+		// console.log(result[i].websites[0].url)
+		// console.log(result[i].websites[0]._id)
+		
+		console.log(result[i].websites)
+	}
+})
+
+
+
+
+
+x('https://paytm.com/shop/p/apple-iphone-5s-16-gb-silver-MOBAPPLE-IPHONENEWG19741390DB1436?src=search-grid&tracker=organic%7C66781%7Ciphone%205s%7Cgrid%7CSearch%7C%7C1%7Cproduction&site_id=1&child_site_id=1', '._1d5g')(function(err, result){
+  
+  	currentprice = myTrim(result);
+  	console.log(currentprice)
+  	
+	price.create(
+		{
+			name: 'snapdeal',
+			url: 'snapdeal.com',
+			currentPrice: currentprice,
+			priceHistory: {
+				priceUpdatedAt: priceUpdatedAt,
+				price: '25858'
+			},
+
+		}, function(err, created){
+				if(!err){
+					// console.log(created)
+					console.log('items saved')
+				}
+				else{
+					console.log(err)
+				}
+			})
 
 });
 
-
- 
-casper.run(function() {
-    this.echo('Everything in the stack has ended.').exit();
-});

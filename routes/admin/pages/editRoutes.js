@@ -3,8 +3,8 @@ var editRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var product = require('../../../models/Products');
-var page = require('../../../models/Pages');
+var Products = require('../../../models/Products');
+var Pages = require('../../../models/Pages');
 
 
 editRouter.route('/:slug')
@@ -13,7 +13,7 @@ editRouter.route('/:slug')
 			var query = {
 				'slug': req.params.slug
 			}
-		product.findOne(query, function(err, productItem){
+		Products.findOne(query, function(err, productItem){
 			if(productItem){
 				res.render('products/editProduct', {
 					title: 'Product',
@@ -24,7 +24,7 @@ editRouter.route('/:slug')
 			* if it found slug in products it renders that else render pages
 			*/
 			if(!productItem){
-				page.findOne(query, function(err, pageItem){
+				Pages.findOne(query, function(err, pageItem){
 					if(pageItem) {
 						
 						res.render('pages/editPage', {
@@ -48,7 +48,7 @@ editRouter.route('/:slug')
 		var query = {
 				'slug': req.params.slug
 			}
-		product.findOne(query, function(err, productItem){
+		Products.findOne(query, function(err, productItem){
 			if(productItem){
 
 				productItem.name = req.body.name,
@@ -68,7 +68,7 @@ editRouter.route('/:slug')
                 
 			}
 			if(!productItem){
-				page.findOne(query, function(err, pageItem){
+				Pages.findOne(query, function(err, pageItem){
 					if (pageItem) {
 						
 						pageItem.name = req.body.name,
@@ -101,9 +101,9 @@ editRouter.route('/:slug/delete')
 		var query = {
 			'slug': req.params.slug
 		}
-		product.findOne(query, function(err, productDelete){
+		Products.findOne(query, function(err, productDelete){
 			if(productDelete){
-				product.remove(query, function(err){
+				Products.remove(query, function(err){
 					if(err){
 						console.log('Mongodb Err product : ' + err)
 					}
@@ -114,8 +114,8 @@ editRouter.route('/:slug/delete')
 			}
 
 			if(!productDelete){
-				page.findOne(query, function(err, pageDelete){
-					page.remove(query, function(err){
+				Pages.findOne(query, function(err, pageDelete){
+					Pages.remove(query, function(err){
 						if(err){
 							console.log('Mongodb Err page: '+ err)
 						}
