@@ -14,7 +14,7 @@ function myTrim(x) {
     return x.replace(/([A-Z])|([a-z])|(s)\w+/g,'');
 }
 var currentprice;
-var previousPrice;
+
 var urls = [];
 product.find({"websites": { $elemMatch: {name: 'amazon'} } }, {websites:1, _id:0}, function(err, result) {
 	if(err){
@@ -31,57 +31,62 @@ product.find({"websites": { $elemMatch: {name: 'amazon'} } }, {websites:1, _id:0
 		
 		}
 
-		console.log(urls)
+			console.log(urls)
 		urls.forEach(function(url, index){
 	 	x(url, '._1d5g')(function(err, result){
 
 	 	currentPrice = myTrim(result);
 	  	console.log(currentPrice)
 	  	
-	  	price.findOne({ priceHistory : {$exists: true}  }, function(err, result){
-	  			var history = result.priceHistory
-	  			
-	  			for (var i = history.length - 1; i >= 0; i--) {
-	  				history[i]
-	  				previousPrice = history[i].price
-	  				// console.log(previousPrice)
-	  				return previousPrice
-	  			}
-	  			if (previousPrice == currentPrice){
-	  				console.log('the price is same no updation')
-	  			}
-	  			else{
-	  				price.create(
-						{
-							name: 'snapdeal',
-							url: 'snapdeal.com',
-							currentPrice: currentPrice,
-							priceHistory: {
-								priceUpdatedAt: priceUpdatedAt,
-								price: '25858'
-						},
+		  	price.findOne({ priceHistory : {$exists: true}  }, function(err, p){
+		  		var previousPrice = [];
+		  		// console.log(p)
+		  			previousPrice.push({
+		  			price:	p.priceHistory[0].price,
+		  			name: p.name
+		  			})
+		  				
+		  			if(err){
+		  				console.log(err)
+		  			}
+		  			if(p){
+		  				
+		  				console.log(previousPrice)
+		  				if (previousPrice == currentPrice){
+		  					console.log('the price is same no updation')
+		  				}
+		  				else{
+			  			
+			  				price.create(
+								{
+									name: 'snapdeal',
+									url: 'snapdeal.com',
+									currentPrice: currentPrice,
+									priceHistory: {
+										priceUpdatedAt: priceUpdatedAt,
+										price: '25858'
+								},
 
-					}, function(err, created){
-						if(!err){
-							// console.log(created)
-							console.log('items saved')
-						}
-						else{
-							console.log(err)
-						}
-					})
+							}, function(err, created){
+								if(!err){
+									// console.log(created)
+									console.log('items saved')
+								}
+								else{
+									console.log(err)
+								}
+							})
 
-	  			}
+		  				}
+		  			}
+		  			
 		  	})
-
-	 		})
 		})
-
-	}
+	})
+	}	
 	else{
 		console.log('No such Product found')
-	}		
-
+	}
 })
 
 
