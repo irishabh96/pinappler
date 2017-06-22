@@ -2,11 +2,23 @@ var express = require('express');
 var mongoose = require('mongoose');
 var pageRouter = express.Router();
 var bodyParser = require('body-parser');
-
+	
 var Pages = require('../../../models/Pages');
 
 pageRouter.route('/')
 		.post(function(req, res){
+		var url = req.originalUrl;
+		console.log(url)
+		req.assert('name', 'Name cannot be empty').notEmpty();
+		req.assert('title', 'Title cannot be empty').notEmpty();
+		req.assert('slug', 'Please check the slug').notEmpty();
+
+		var errors = req.validationErrors();
+		if(errors){
+			req.flash('errors', errors);
+		  console.error(errors)
+		  return res.redirect('/admin/pages/add');
+		}	
 			var slug = req.body.slug
 			console.log(slug);
 			var query = {
@@ -33,6 +45,7 @@ pageRouter.route('/')
 							else{
 								console.log('Created Successfully')
 								// res.status(200).json(createditem)
+								req.flash('success', 'Page created Successfully')
 								res.redirect('/admin/pages')
 							}
 

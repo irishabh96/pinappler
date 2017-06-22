@@ -10,8 +10,8 @@ var config = require('../../config');
 
 adminRouter.route('/')
 		.get (function(req, res){
-			res.render('index', {
-			title : 'admin',
+			res.render('home', {
+			title : 'admin'
 	 });
 });
 

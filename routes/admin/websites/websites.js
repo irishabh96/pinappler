@@ -57,7 +57,7 @@ websiteRoute.route('/')
 				console.log(err)
 			}
 			else{
-				res.render('websites/listwebsites', {
+				res.render('websites/listWebsites', {
 					title: 'Websites',
 					thead: ['Website Name', 'Website Url', 'Scrapping Method'],
 					data: result

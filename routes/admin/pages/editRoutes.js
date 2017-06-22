@@ -45,6 +45,18 @@ editRouter.route('/:slug')
 	})
 // update
 	.post(function(req, res){
+		var url = req.url;
+		req.assset('name', 'Name cannot be empty').notEmpty();
+		req.assert('brand', 'Brand cannot be empty').notEmpty();
+		req.assert('category', 'Please select a category').notEmpty();
+		req.assert('description', '6 to 20 characters required').len(6, 20);
+
+		var errors = req.validationErrors();
+		if (errors) {
+		  req.flash('error', errors);
+		  res.redirect(url);
+		}	
+		
 		var query = {
 				'slug': req.params.slug
 			}

@@ -1,0 +1,35 @@
+<%- contentFor('content') %>
+<div class= "container">
+	<div>
+    	<h1>All Webpages</h1>
+    <table class="table table-inverse col-md-10">
+      <thead>
+        <tr>
+          <% if(thead){ %>
+              <% thead.forEach(function(item, index){ %>
+                <th> <%- item %> </th>
+            <% }) %>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+      	<% if(data){ %>
+          <% data.forEach(function(item, index){ %>
+            <tr>
+              <td><%-item.websiteName%></td>
+              <td><%-item.websiteUrl%></td>
+              <td><%-item.scrappingMethod%></td>
+              <td>
+                <a href="/admin/websites/edit/<%-item.websiteUrl%>"><span class="glyphicon glyphicon-check"></span></a>
+                <a href="/admin/websites/delete/<%-item.websiteUrl%>"><span class="glyphicon glyphicon-remove-circle"></span></a>
+              </td>
+            </tr> 
+          <% }) %>
+      <% } %>  
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
